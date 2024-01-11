@@ -1,0 +1,31 @@
+.header {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--color-lines);
+	background: var(--color-bg);
+}
+
+.logo {
+	padding: 34px 32px 34px 24px;
+}
+
+.content {
+	padding: 20px 26px 28px 32px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-left: 1px solid var(--color-lines);
+}
+
+.buttonsWrapper {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.settings {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
