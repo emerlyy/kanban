@@ -1,0 +1,42 @@
+.title {
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+.xl {
+	font-size: 24px;
+	line-height: 30px;
+}
+
+.l {
+	font-size: 18px;
+	line-height: 23px;
+}
+
+.m {
+	font-size: 15px;
+	line-height: 19px;
+}
+
+.s {
+	font-size: 12px;
+	line-height: 15px;
+	letter-spacing: 2.4px;
+}
+
+.primary {
+	color: var(--color-text);
+}
+
+.light {
+	color: var(--color-light);
+}
+
+.dark {
+	color: var(--color-dark);
+}
+
+.gray {
+	color: var(--color-gray);
+}

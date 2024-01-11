@@ -1,0 +1,36 @@
+.text {
+}
+
+.m {
+	font-size: 12px;
+	line-height: 15px;
+}
+
+.l {
+	font-size: 13px;
+	line-height: 23px;
+}
+
+.primary {
+	color: var(--color-text);
+}
+
+.light {
+	color: var(--color-light);
+}
+
+.dark {
+	color: var(--color-gray-dark);
+}
+
+.gray {
+	color: var(--color-gray);
+}
+
+.medium {
+	font-weight: 500;
+}
+
+.bold {
+	font-weight: 700;
+}
