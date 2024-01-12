@@ -6,6 +6,18 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
+	--color-bg: var(--color-accent);
+	--color-text: var(--color-light);
+	--color-bg-hover: var(--color-bg);
+	--color-text-hover: var(--color-text);
+
+	background: var(--color-bg);
+	color: var(--color-text);
+
+	&:hover {
+		background: var(--color-bg-hover);
+		color: var(--color-text-hover);
+	}
 }
 
 .l {
@@ -23,35 +35,49 @@
 }
 
 .primary {
-	background: var(--color-accent);
-	color: var(--color-light);
-
-	&:hover {
-		background: var(--color-accent-light);
-	}
+	--color-bg: var(--color-accent);
+	--color-text: var(--color-light);
+	--color-bg-hover: var(--color-accent-light);
 }
 
 .secondary {
-	background: color-mix(in srgb, var(--color-accent), transparent 90%);
-	color: var(--color-accent);
-
-	&:hover {
-		background: color-mix(in srgb, var(--color-accent), transparent 75%);
-	}
-}
-
-body[data-theme="dark"] {
-	.secondary {
-		background: var(--color-light);
-		color: var(--color-accent);
-	}
+	--color-bg: color-mix(in srgb, var(--color-accent), transparent 90%);
+	--color-text: var(--color-accent);
+	--color-bg-hover: color-mix(in srgb, var(--color-accent), transparent 75%);
 }
 
 .destructive {
-	background: var(--color-red);
-	color: var(--color-light);
+	--color-bg: var(--color-red);
+	--color-text: var(--color-light);
+	--color-bg-hover: var(--color-red-light);
+}
 
-	&:hover {
-		background: var(--color-red-light);
+.sidebar {
+	gap: 15px;
+	justify-content: flex-start;
+	padding-left: 32px;
+	cursor: pointer;
+	border-radius: 0 100px 100px 0;
+
+	> span {
+		color: inherit;
+	}
+
+	path {
+		fill: currentColor;
+	}
+}
+
+.sidebar.secondary {
+	--color-bg: none;
+	--color-text: var(--color-gray);
+	--color-text-hover: var(--color-accent);
+}
+
+body[data-theme="dark"] {
+	.secondary:not(.sidebar) {
+		--color-bg: var(--color-light);
+		--color-text: var(--color-accent);
+		--color-bg-hover: var(--color-light);
 	}
 }
