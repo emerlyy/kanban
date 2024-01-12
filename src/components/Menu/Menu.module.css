@@ -1,0 +1,30 @@
+.menu {
+	width: 300px;
+	background: var(--color-bg-elements);
+	padding-block: 32px 48px;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid var(--color-lines);
+	z-index: 1;
+}
+
+.logo {
+	margin-bottom: 54px;
+	padding-inline: 34px;
+}
+
+.boardsList {
+	flex-grow: 1;
+	padding-right: 24px;
+}
+
+.bottomControls {
+	padding-right: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+}
+
+.themeSwitcher {
+	margin-left: 24px;
+}

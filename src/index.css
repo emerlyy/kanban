@@ -3,6 +3,7 @@
 
 * {
 	font-family: "Plus Jakarta Sans", sans-serif;
+	transition: background-color 0.15s, border-color 0.15s;
 }
 
 :root {
@@ -28,15 +29,24 @@
 }
 
 body {
-	background: var(--color-gray-light);
-	--color-bg: var(--color-light);
+	--color-bg: var(--color-gray-light);
+	--color-bg-elements: var(--color-light);
 	--color-lines: var(--color-lines-light);
 	--color-text: var(--color-dark);
+	background: var(--color-bg);
 }
 
 body[data-theme="dark"] {
-	background: var(--color-gray-very-dark);
-	--color-bg: var(--color-gray-dark);
+	--color-bg: var(--color-gray-very-dark);
+	--color-bg-elements: var(--color-gray-dark);
 	--color-lines: var(--color-lines-dark);
 	--color-text: var(--color-light);
+}
+
+#root {
+	display: flex;
+	min-height: 100svh;
+	> main {
+		flex-grow: 1;
+	}
 }

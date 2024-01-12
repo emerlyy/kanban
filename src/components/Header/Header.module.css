@@ -1,17 +1,16 @@
 .header {
 	display: flex;
-	align-items: center;
 	border-bottom: 1px solid var(--color-lines);
-	background: var(--color-bg);
+	background: var(--color-bg-elements);
 }
 
 .logo {
-	padding: 34px 32px 34px 24px;
+	padding: 32px 30px 0 24px;
 }
 
 .content {
 	padding: 20px 26px 28px 32px;
-	width: 100%;
+	flex-grow: 1;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
