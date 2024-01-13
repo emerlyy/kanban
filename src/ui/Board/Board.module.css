@@ -1,7 +1,6 @@
 .board {
 	display: flex;
 	gap: 24px;
-	align-items: flex-start;
 	padding: 24px 24px 50px 24px;
   overflow: visible;
 }

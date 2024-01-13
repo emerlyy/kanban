@@ -1,5 +1,6 @@
 import { Board as TBoard } from "@/types";
 import Column from "@/ui/Column/Column";
+import NewColumnButton from "../NewColumnButton/NewColumnButton";
 import styles from "./Board.module.css";
 
 type Props = {
@@ -18,6 +19,7 @@ const Board = ({ board }: Props) => {
 					/>
 				);
 			})}
+			<NewColumnButton />
 		</div>
 	);
 };

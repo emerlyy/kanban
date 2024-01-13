@@ -26,6 +26,17 @@
 	--color-gray-light: #f4f7fd;
 	--color-gray-dark: #2b2c37;
 	--color-gray-very-dark: #20212c;
+
+	--gradient-light: linear-gradient(
+		180deg,
+		#e9effa 0%,
+		rgba(233, 239, 250, 0.5) 100%
+	);
+	--gradient-dark: linear-gradient(
+		180deg,
+		rgba(43, 44, 55, 0.25) 0%,
+		rgba(43, 44, 55, 0.13) 100%
+	);
 }
 
 body {
@@ -33,6 +44,7 @@ body {
 	--color-bg-elements: var(--color-light);
 	--color-lines: var(--color-lines-light);
 	--color-text: var(--color-dark);
+	--color-gradient: var(--gradient-light);
 	background: var(--color-bg);
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
@@ -47,6 +59,7 @@ body[data-theme="dark"] {
 	--color-bg-elements: var(--color-gray-dark);
 	--color-lines: var(--color-lines-dark);
 	--color-text: var(--color-light);
+	--color-gradient: var(--gradient-dark);
 }
 
 #root {
