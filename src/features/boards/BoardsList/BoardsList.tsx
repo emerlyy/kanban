@@ -1,11 +1,22 @@
-import { useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { Board } from "@/types";
 import BoardListItem from "@/ui/BoardsListItem/BoardsListItem";
 import Title from "@/ui/Title/Title";
-import { selectAllBoards } from "../boardSelectors";
+import { selectActiveBoard, selectAllBoards } from "../boardSelectors";
+import { setActiveBoard } from "../boardsSlice";
 import styles from "./BoardsList.module.css";
 
 const BoardsList = () => {
 	const boards = useAppSelector(selectAllBoards);
+	const activeBoard = useAppSelector(selectActiveBoard);
+
+	const dispatch = useAppDispatch();
+
+	const changeBoard = (board: Board) => () => {
+		if (board !== activeBoard) {
+			dispatch(setActiveBoard(board));
+		}
+	};
 
 	return (
 		<>
@@ -15,7 +26,11 @@ const BoardsList = () => {
 			<ul className={styles.list}>
 				{boards.map((board, index) => (
 					<li key={`${board.name}-${index}`}>
-						<BoardListItem title={board.name} active={false} />
+						<BoardListItem
+							title={board.name}
+							active={board === activeBoard}
+							onClick={changeBoard(board)}
+						/>
 					</li>
 				))}
 				<li>

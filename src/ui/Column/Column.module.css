@@ -1,0 +1,13 @@
+.column{
+  width: 280px;
+}
+
+.columnTitle {
+	margin-bottom: 24px;
+}
+
+.tasksWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}

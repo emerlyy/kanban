@@ -5,21 +5,26 @@ import { loadBoards } from "./boardsAsyncActions";
 type Status = "idle" | "loading" | "received" | "rejected";
 
 type BoardsState = {
+	active: Board | null;
 	items: Board[];
 	status: Status;
 };
 
 const initialState: BoardsState = {
+	active: null,
 	items: [],
 	status: "idle",
 };
 
 const boardsSlice = createSlice({
-	name: "boards",
+	name: "@@boards",
 	initialState,
 	reducers: {
 		addBoard: (store, action: PayloadAction<Board>) => {
 			store.items.push(action.payload);
+		},
+		setActiveBoard: (store, action: PayloadAction<Board>) => {
+			store.active = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -37,6 +42,6 @@ const boardsSlice = createSlice({
 	},
 });
 
-export const { addBoard } = boardsSlice.actions;
+export const { addBoard, setActiveBoard } = boardsSlice.actions;
 
 export default boardsSlice.reducer;

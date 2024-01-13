@@ -1,5 +1,5 @@
 .menuLabel {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	bottom: 32px;
 	width: 56px;

@@ -1,9 +1,9 @@
 export type Board = {
 	name: string;
-	columns: Item[];
+	columns: Column[];
 };
 
-export  type Item = {
+export type Column = {
 	name: string;
 	tasks: Task[];
 };

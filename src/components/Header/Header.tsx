@@ -1,5 +1,6 @@
 import icon from "@/assets/icon-vertical-ellipsis.svg";
 import { useTheme } from "@/context/ThemeContext";
+import { selectActiveBoard } from "@/features/boards/boardSelectors";
 import { selectMenuState } from "@/features/menu/menuSelectors";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import Button from "@/ui/Button/Button";
@@ -10,8 +11,12 @@ import styles from "./Header.module.css";
 const Header = () => {
 	const { theme } = useTheme();
 	const isMenuOpened = useAppSelector(selectMenuState);
+	const activeBoard = useAppSelector(selectActiveBoard);
+
 	return (
-		<div className={styles.header}>
+		<div
+			className={`${styles.header} ${isMenuOpened ? styles.sidebarActive : ""}`}
+		>
 			{!isMenuOpened && (
 				<Logo
 					className={styles.logo}
@@ -19,7 +24,7 @@ const Header = () => {
 				/>
 			)}
 			<div className={styles.content}>
-				<Title size="xl">Platform Launch</Title>
+				<Title size="xl">{activeBoard?.name || ". . ."}</Title>
 				<div className={styles.buttonsWrapper}>
 					<Button color="primary" size="l">
 						+ Add New Task

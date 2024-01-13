@@ -34,6 +34,12 @@ body {
 	--color-lines: var(--color-lines-light);
 	--color-text: var(--color-dark);
 	background: var(--color-bg);
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+	display: none;
 }
 
 body[data-theme="dark"] {

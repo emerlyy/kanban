@@ -9,7 +9,7 @@ const initialState: MenuState = {
 };
 
 const menuSlice = createSlice({
-	name: "menu",
+	name: "@@menu",
 	initialState,
 	reducers: {
 		toggleMenu: (state) => {

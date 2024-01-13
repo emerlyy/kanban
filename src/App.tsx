@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import styles from "./App.module.css";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
+import ActiveBoard from "./features/boards/ActiveBoard/ActiveBoard";
 import { loadBoards } from "./features/boards/boardsAsyncActions";
 import ShowMenuLabel from "./features/menu/ShowMenuLabel/ShowMenuLabel";
 import { selectMenuState } from "./features/menu/menuSelectors";
@@ -21,6 +23,13 @@ const App = () => {
 			<main>
 				<Header />
 				<ShowMenuLabel />
+				<div
+					className={`${styles.boardWrapper} ${
+						isMenuOpened ? styles.sidebarActive : ""
+					}`}
+				>
+					<ActiveBoard />
+				</div>
 			</main>
 		</>
 	);
