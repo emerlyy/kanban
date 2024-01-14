@@ -15,7 +15,7 @@ export type Task = {
 	subtasks: Subtask[];
 };
 
-type TaskStatus = "Todo" | "Doing" | "Done";
+type TaskStatus = Column['name'][];
 
 export type Subtask = {
 	title: string;

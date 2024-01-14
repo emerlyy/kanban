@@ -10,14 +10,14 @@ const Task = ({ title, subtasks }: Props) => {
 		(subtask) => subtask.isCompleted
 	).length;
 	return (
-		<div className={styles.taskBody}>
-			<Title tag="h3" color="primary" size="m">
+		<button className={styles.taskBody}>
+			<Title tag="h3" color="primary" size="m" className={styles.taskTitle}>
 				{title}
 			</Title>
-			<Text tag='div' color="gray">
+			<Text tag='div' color="gray" weight="700">
 				{completedSubtasks} of {subtasks.length} subtasks
 			</Text>
-		</div>
+		</button>
 	);
 };
 

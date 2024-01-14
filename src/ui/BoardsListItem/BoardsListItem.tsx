@@ -17,7 +17,7 @@ const BoardListItem = ({
 }: Props) => {
 	return (
 		<Button
-			type="sidebar"
+			variant="sidebar"
 			color={active ? "primary" : "secondary"}
 			size="l"
 			className={`${styles.listItem} ${className}`}

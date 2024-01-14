@@ -20,8 +20,18 @@ const boardsSlice = createSlice({
 	name: "@@boards",
 	initialState,
 	reducers: {
-		addBoard: (store, action: PayloadAction<Board>) => {
-			store.items.push(action.payload);
+		createBoard: (
+			store,
+			action: PayloadAction<{ name: Board["name"]; columnNames: string[] }>
+		) => {
+			const newBoard: Board = {
+				name: action.payload.name,
+				columns: action.payload.columnNames.map((name) => ({
+					name,
+					tasks: [],
+				})),
+			};
+			store.items.push(newBoard);
 		},
 		setActiveBoard: (store, action: PayloadAction<Board>) => {
 			store.active = action.payload;
@@ -42,6 +52,6 @@ const boardsSlice = createSlice({
 	},
 });
 
-export const { addBoard, setActiveBoard } = boardsSlice.actions;
+export const { createBoard, setActiveBoard } = boardsSlice.actions;
 
 export default boardsSlice.reducer;

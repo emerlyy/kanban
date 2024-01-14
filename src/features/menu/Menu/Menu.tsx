@@ -1,3 +1,4 @@
+import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { useTheme } from "@/context/ThemeContext";
 import BoardsList from "@/features/boards/BoardsList/BoardsList";
 import { toggleMenu } from "@/features/menu/menuSlice";
@@ -5,7 +6,6 @@ import { useAppDispatch } from "@/hooks/reduxHooks";
 import Button from "@/ui/Button/Button";
 import Logo from "@/ui/Logo/Logo";
 import Title from "@/ui/Title/Title";
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import styles from "./Menu.module.css";
 
 const Menu = () => {
@@ -27,7 +27,7 @@ const Menu = () => {
 			</div>
 			<div className={styles.bottomControls}>
 				<ThemeSwitcher className={styles.themeSwitcher} />
-				<Button type="sidebar" size="l" color="secondary" onClick={hideMenu}>
+				<Button variant="sidebar" size="l" color="secondary" onClick={hideMenu}>
 					<HideIcon />
 					<Title tag="span" size="m" color="gray">
 						Hide Sidebar

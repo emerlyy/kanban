@@ -1,7 +1,7 @@
 import styles from "./Text.module.css";
 
 type TextSize = "m" | "l";
-type TextColor = "primary" | "light" | "dark" | "gray";
+type TextColor = "primary" | "light" | "dark" | "gray" | "label" | "warning";
 type TextWeight = "500" | "700";
 
 type Props = {

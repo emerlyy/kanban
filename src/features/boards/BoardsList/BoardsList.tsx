@@ -1,22 +1,13 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { Board } from "@/types";
+import { useModal } from "@/hooks/useModal";
 import BoardListItem from "@/ui/BoardsListItem/BoardsListItem";
 import Title from "@/ui/Title/Title";
-import { selectActiveBoard, selectAllBoards } from "../boardSelectors";
-import { setActiveBoard } from "../boardsSlice";
+import NewBoardModal from "../NewBoardModal/NewBoardModal";
+import { useBoards } from "../useBoards";
 import styles from "./BoardsList.module.css";
 
 const BoardsList = () => {
-	const boards = useAppSelector(selectAllBoards);
-	const activeBoard = useAppSelector(selectActiveBoard);
-
-	const dispatch = useAppDispatch();
-
-	const changeBoard = (board: Board) => () => {
-		if (board !== activeBoard) {
-			dispatch(setActiveBoard(board));
-		}
-	};
+	const [boards, activeBoard, changeBoard] = useBoards();
+	const [isModalOpened, openModal, closeModal] = useModal();
 
 	return (
 		<>
@@ -37,9 +28,11 @@ const BoardsList = () => {
 					<BoardListItem
 						title="+ Create New Board"
 						className={styles.colorAccent}
+						onClick={openModal}
 					/>
 				</li>
 			</ul>
+			<NewBoardModal isOpened={isModalOpened} onClose={closeModal} />
 		</>
 	);
 };

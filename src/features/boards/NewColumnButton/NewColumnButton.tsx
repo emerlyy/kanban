@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/hooks/reduxHooks";
-import Title from "../Title/Title";
+import Title from "../../../ui/Title/Title";
 import styles from "./NewColumnButton.module.css";
 
 const NewColumnButton = () => {

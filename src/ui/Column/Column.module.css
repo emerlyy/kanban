@@ -1,5 +1,7 @@
-.column{
-  width: 280px;
+.column {
+	width: 280px;
+	display: flex;
+	flex-direction: column;
 }
 
 .columnTitle {
@@ -10,4 +12,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	height: 100%;
+	border-radius: 6px;
+
+	&:empty {
+		background: var(--color-gradient);
+	}
 }

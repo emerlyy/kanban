@@ -1,0 +1,6 @@
+.modal {
+	max-width: 480px;
+  padding: 32px;
+	border-radius: 6px;
+	background: var(--color-bg-elements);
+}

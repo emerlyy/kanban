@@ -1,0 +1,74 @@
+.inputBody {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.inputWrapper {
+	display: flex;
+	gap: 16px;
+}
+
+.input {
+	position: relative;
+	flex-grow: 1;
+	display: flex;
+}
+
+.inputField {
+	flex-grow: 1;
+	margin: 0;
+	padding: 8px 16px;
+	border: none;
+	outline: none;
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-gray), transparent 75%);
+	background: transparent;
+	border-radius: 4px;
+	transition: 0.15s;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 23px;
+	color: var(--color-text);
+
+	&::placeholder {
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 23px;
+		color: color-mix(in srgb, var(--color-text), transparent 75%);
+	}
+
+	&:focus-within {
+		box-shadow: 0 0 0 1px var(--color-accent);
+	}
+
+	&.error {
+		box-shadow: 0 0 0 1px var(--color-red);
+	}
+}
+
+.errorMessage {
+	position: absolute;
+	top: 50%;
+	right: 16px;
+	translate: 0 -50%;
+}
+
+.removeButton {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	outline: none;
+
+	path {
+		fill: var(--color-gray);
+	}
+
+	&:hover {
+		path {
+			fill: var(--color-red);
+		}
+	}
+}

@@ -1,4 +1,6 @@
 .text {
+	--color: var(--color-text);
+	color: var(--color);
 }
 
 .m {
@@ -12,19 +14,27 @@
 }
 
 .primary {
-	color: var(--color-text);
+	--color: var(--color-text);
 }
 
 .light {
-	color: var(--color-light);
+	--color: var(--color-light);
 }
 
 .dark {
-	color: var(--color-gray-dark);
+	--color: var(--color-gray-dark);
 }
 
 .gray {
-	color: var(--color-gray);
+	--color: var(--color-gray);
+}
+
+.label {
+	--color: var(--color-label);
+}
+
+.warning {
+	--color: var(--color-red);
 }
 
 .medium {

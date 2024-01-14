@@ -2,30 +2,31 @@ import styles from "./Button.module.css";
 
 type ButtonColor = "primary" | "secondary" | "destructive";
 type ButtonSize = "l" | "s";
-type ButtonType = "default" | "sidebar";
+type ButtonVariant = "default" | "sidebar";
 
 type Props = {
 	color?: ButtonColor;
 	size?: ButtonSize;
-	type?: ButtonType;
+	variant?: ButtonVariant;
 	className?: string;
 	onClick?: () => void;
 	children: React.ReactNode;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
 	color = "primary",
 	size = "s",
-	type = "default",
+	variant = "default",
 	className,
 	onClick,
 	children,
+	...props
 }: Props) => {
 	const style = `${styles.button} ${styles[size]} ${styles[color]} ${
-		type === "sidebar" ? ` ${styles.sidebar}` : ""
+		variant === "sidebar" ? ` ${styles.sidebar}` : ""
 	} ${className ? ` ${className}` : ""}`;
 	return (
-		<button onClick={onClick} className={style}>
+		<button type='button' onClick={onClick} className={style} {...props}>
 			{children}
 		</button>
 	);
