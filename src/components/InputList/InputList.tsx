@@ -1,31 +1,32 @@
 import Button from "@/ui/Button/Button";
 import Input from "@/ui/Input/Input";
 import Text from "@/ui/Text/Text";
+import { nanoid } from "@reduxjs/toolkit";
 import {
 	Control,
+	Controller,
 	FieldErrors,
-	FieldValues,
 	UseFormRegister,
 	useFieldArray,
 } from "react-hook-form";
 import styles from "./InputList..module.css";
 
-type Props<T extends FieldValues> = {
+export type ListInput = { value: string; inputId: ReturnType<typeof nanoid> };
+
+type Props = {
 	label?: string;
-	register: UseFormRegister<T>;
-	control: Control<T>;
-	errors: FieldErrors<T>;
+	register: UseFormRegister<any>;
+	control: Control<any>;
+	errors?: FieldErrors<any>;
 	name: string;
 };
 
-const InputList = <T extends FieldValues>({
-	label,
-	control,
-	errors,
-	name,
-	register,
-}: Props<T>) => {
-	const { fields, append, remove } = useFieldArray({
+const InputList = ({ label, control, errors, name, register }: Props) => {
+	const { fields, append, remove } = useFieldArray<
+		any,
+		string,
+		"id" | "value" | "inputId"
+	>({
 		control,
 		//@ts-ignore
 		name: "columns",
@@ -44,15 +45,27 @@ const InputList = <T extends FieldValues>({
 			</Text>
 			<div className={styles.inputList}>
 				{fields.map((field, index) => (
-					<Input
-						removable
+					<Controller
+						name={`${name}.${index}`}
 						key={field.id}
-						{...register(`${name}.${index}.value` as any, {
-							required: { value: true, message: "Can’t be empty" },
-						})}
-						onRemove={() => remove(index)}
-						//@ts-ignore
-						errorMessage={errors[name]?.[index]?.value.message}
+						control={control}
+						render={({ field: { value, onChange, ...rest } }) => (
+							<Input
+								autoComplete="off"
+								removable
+								value={value.value}
+								onChange={(event) =>
+									onChange({
+										value: event.target.value,
+										inputId: field.inputId,
+									})
+								}
+								onRemove={() => remove(index)}
+								{...rest}
+								//@ts-ignore
+								errorMessage={errors[name]?.[index]?.value.message}
+							/>
+						)}
 					/>
 				))}
 				<Button
@@ -60,7 +73,7 @@ const InputList = <T extends FieldValues>({
 					color="secondary"
 					onClick={() => {
 						//@ts-ignore
-						append({ value: "" });
+						append({ value: "", inputId: nanoid() });
 					}}
 				>
 					+ Add New Column
