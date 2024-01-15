@@ -32,9 +32,21 @@ const boardsSlice = createSlice({
 				})),
 			};
 			store.items.push(newBoard);
+			if (!store.active) {
+				store.active = newBoard;
+			}
 		},
 		setActiveBoard: (store, action: PayloadAction<Board>) => {
 			store.active = action.payload;
+		},
+		editBoard: (
+			store,
+			action: PayloadAction<{ name: string; newColumns: Board["columns"] }>
+		) => {
+			if (store.active) {
+				store.active.name = action.payload.name;
+				store.active.columns = action.payload.newColumns;
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -52,6 +64,6 @@ const boardsSlice = createSlice({
 	},
 });
 
-export const { createBoard, setActiveBoard } = boardsSlice.actions;
+export const { createBoard, setActiveBoard, editBoard } = boardsSlice.actions;
 
 export default boardsSlice.reducer;
