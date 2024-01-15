@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styles from "./App.module.css";
 import Header from "./components/Header/Header";
-import ActiveBoard from "./features/boards/ActiveBoard/ActiveBoard";
+import ActiveBoardDisplay from "./features/boards/ActiveBoardDisplay";
 import { loadBoards } from "./features/boards/boardsAsyncActions";
 import Menu from "./features/menu/Menu/Menu";
 import ShowMenuLabel from "./features/menu/ShowMenuLabel/ShowMenuLabel";
@@ -28,7 +28,7 @@ const App = () => {
 						isMenuOpened ? styles.sidebarActive : ""
 					}`}
 				>
-					<ActiveBoard />
+					<ActiveBoardDisplay />
 				</div>
 			</main>
 		</>

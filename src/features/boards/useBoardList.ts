@@ -3,7 +3,7 @@ import { Board } from "@/types";
 import { selectActiveBoard, selectAllBoards } from "./boardSelectors";
 import { setActiveBoard } from "./boardsSlice";
 
-export const useBoards = () => {
+export const useBoardList = () => {
 	const dispatch = useAppDispatch();
 
 	const boards = useAppSelector(selectAllBoards);

@@ -1,6 +1,6 @@
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
 import { useTheme } from "@/context/ThemeContext";
-import BoardsList from "@/features/boards/BoardsList/BoardsList";
+import BoardsList from "@/features/boards/BoardList/BoardList";
 import { toggleMenu } from "@/features/menu/menuSlice";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import Button from "@/ui/Button/Button";
