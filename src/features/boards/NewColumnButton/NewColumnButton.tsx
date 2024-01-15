@@ -1,17 +1,24 @@
-import { useAppDispatch } from "@/hooks/reduxHooks";
+import BoardFormModal from "@/features/boards/BoardFormModal/BoardFormModal";
 import Title from "../../../ui/Title/Title";
+import { useEditBoardModal } from "../useEditBoardModal";
 import styles from "./NewColumnButton.module.css";
 
 const NewColumnButton = () => {
-	const dispatch = useAppDispatch();
+	const { openModal, modalProps } = useEditBoardModal();
 
-	const handleClick = () => {};
 	return (
-		<button className={styles.newColumnButton}>
-			<Title tag="span" size="xl" color="gray">
-				+ New Column
-			</Title>
-		</button>
+		<>
+			<button className={styles.newColumnButton} onClick={openModal}>
+				<Title tag="span" size="xl" color="gray">
+					+ New Column
+				</Title>
+			</button>
+			<BoardFormModal
+				title="Edit Board"
+				submiButtonText="Save Changes"
+				{...modalProps}
+			/>
+		</>
 	);
 };
 

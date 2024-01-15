@@ -1,0 +1,23 @@
+import { IBoardFormValues } from "@/features/boards/BoardFormModal/BoardFormModal";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { useModal } from "@/hooks/useModal";
+import { SubmitHandler } from "react-hook-form";
+import { createBoard } from "./boardsSlice";
+
+export const useNewBoardModal = () => {
+	const [isOpened, openModal, closeModal] = useModal();
+
+	const dispatch = useAppDispatch();
+
+	const onSubmit: SubmitHandler<IBoardFormValues> = (data) => {
+		dispatch(
+			createBoard({
+				name: data.name,
+				columnNames: data.columns.map((col) => col.value),
+			})
+		);
+		closeModal();
+	};
+
+	return { openModal, modalProps: { isOpened, closeModal, onSubmit } };
+};
