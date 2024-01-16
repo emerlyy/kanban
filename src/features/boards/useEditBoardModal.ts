@@ -1,8 +1,6 @@
 import { IBoardFormValues } from "@/features/boards/BoardFormModal/BoardFormModal";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useModal } from "@/hooks/useModal";
-import { Column } from "@/types";
-import { nanoid } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { editBoard } from "./boardsSlice";
@@ -13,29 +11,25 @@ export const useEditBoardModal = () => {
 	const [isOpened, openModal, closeModal] = useModal();
 	const { activeBoard } = useBoards();
 
-	const initialColumns = useMemo(
-		() =>
-			activeBoard?.columns.map((col) => ({
-				...col,
-				inputId: nanoid(),
-			})),
-		[activeBoard]
-	);
+	const initialColumns = useMemo(() => activeBoard?.columns, [activeBoard]);
 
 	const onSubmit: SubmitHandler<IBoardFormValues> = (data) => {
-		const newColumns: Column[] = data.columns.map((col) => ({
+		const newColumns = data.columns.map((col) => ({
 			name: col.value,
 			tasks:
-				initialColumns?.find((icol) => icol.inputId === col.inputId)?.tasks ||
-				[],
+				initialColumns?.find((icol) => icol.id === col.inputId)?.tasks || [],
+			id: col.inputId,
 		}));
 
-		dispatch(
-			editBoard({
-				name: data.name,
-				newColumns,
-			})
-		);
+		if (activeBoard) {
+			dispatch(
+				editBoard({
+					id: activeBoard.id,
+					name: data.name,
+					newColumns,
+				})
+			);
+		}
 		closeModal();
 	};
 
@@ -48,7 +42,7 @@ export const useEditBoardModal = () => {
 			initialName: activeBoard?.name,
 			initialColumns: initialColumns?.map((col) => ({
 				value: col.name,
-				inputId: col.inputId,
+				inputId: col.id,
 			})),
 		},
 	};

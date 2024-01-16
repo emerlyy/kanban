@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/hooks/reduxHooks";
-import { Board } from "@/types";
+import {  LocalBoard } from "@/types";
 import { setActiveBoard } from "./boardsSlice";
 import { useBoards } from "./useBoards";
 
@@ -8,9 +8,9 @@ export const useBoardList = () => {
 
 	const { boards, activeBoard } = useBoards();
 
-	const changeBoard = (board: Board) => () => {
-		if (board !== activeBoard) {
-			dispatch(setActiveBoard(board));
+	const changeBoard = (board: LocalBoard) => () => {
+		if (board.id !== activeBoard?.id) {
+			dispatch(setActiveBoard(board.id));
 		}
 	};
 

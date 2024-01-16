@@ -1,11 +1,11 @@
 import { Api } from "@/api";
 import { RootState } from "@/store";
-import { Board } from "@/types";
+import { LocalBoard } from "@/types";
+import { extractLocalBoards } from "@/utils/extractLocalBoards";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setActiveBoard } from "./boardsSlice";
 
 export const loadBoards = createAsyncThunk<
-	Board[],
+	LocalBoard[],
 	undefined,
 	{
 		state: RootState;
@@ -14,11 +14,11 @@ export const loadBoards = createAsyncThunk<
 	}
 >(
 	"@@boards/loadBoards",
-	async (_, { rejectWithValue, dispatch, extra: { api } }) => {
+	async (_, { rejectWithValue, extra: { api } }) => {
 		try {
 			const boards = await api.getAllBoards();
-			if (boards.length) dispatch(setActiveBoard(boards[0]));
-			return boards;
+			const localBoards = extractLocalBoards(boards);
+			return localBoards;
 		} catch (err) {
 			if (err instanceof Error) return rejectWithValue(err.message);
 			return rejectWithValue("Cannot fetch boards");

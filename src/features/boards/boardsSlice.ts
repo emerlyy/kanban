@@ -1,12 +1,12 @@
-import { Board } from "@/types";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { LocalBoard } from "@/types";
+import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
 import { loadBoards } from "./boardsAsyncActions";
 
 type Status = "idle" | "loading" | "received" | "rejected";
 
 type BoardsState = {
-	active: Board | null;
-	items: Board[];
+	active: LocalBoard["id"] | null;
+	items: LocalBoard[];
 	status: Status;
 };
 
@@ -21,31 +21,38 @@ const boardsSlice = createSlice({
 	initialState,
 	reducers: {
 		createBoard: (
-			store,
-			action: PayloadAction<{ name: Board["name"]; columnNames: string[] }>
+			state,
+			action: PayloadAction<{ name: LocalBoard["name"]; columnNames: string[] }>
 		) => {
-			const newBoard: Board = {
+			const newBoard: LocalBoard = {
+				id: nanoid(),
 				name: action.payload.name,
 				columns: action.payload.columnNames.map((name) => ({
+					id: nanoid(),
 					name,
 					tasks: [],
 				})),
 			};
-			store.items.push(newBoard);
-			if (!store.active) {
-				store.active = newBoard;
+			state.items.push(newBoard);
+			if (!state.active) {
+				state.active = newBoard.id;
 			}
 		},
-		setActiveBoard: (store, action: PayloadAction<Board>) => {
-			store.active = action.payload;
+		setActiveBoard: (state, action: PayloadAction<BoardsState["active"]>) => {
+			state.active = action.payload;
 		},
 		editBoard: (
-			store,
-			action: PayloadAction<{ name: string; newColumns: Board["columns"] }>
+			state,
+			action: PayloadAction<{
+				id: string;
+				name: string;
+				newColumns: LocalBoard["columns"];
+			}>
 		) => {
-			if (store.active) {
-				store.active.name = action.payload.name;
-				store.active.columns = action.payload.newColumns;
+			const board = state.items.find((board) => board.id === action.payload.id);
+			if (board) {
+				board.name = action.payload.name;
+				board.columns = action.payload.newColumns;
 			}
 		},
 	},
@@ -57,6 +64,7 @@ const boardsSlice = createSlice({
 			.addCase(loadBoards.fulfilled, (state, action) => {
 				state.status = "received";
 				state.items.push(...action.payload);
+				if (state.items.length) state.active = state.items[0].id;
 			})
 			.addCase(loadBoards.rejected, (state) => {
 				state.status = "rejected";
