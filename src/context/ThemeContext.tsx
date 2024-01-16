@@ -16,9 +16,20 @@ type ThemeProviderProps = {
 	children: React.ReactNode;
 };
 
+const setInitialState = () => {
+  let currentTheme:Theme = "light";
+
+  if (typeof window !== "undefined" && window.localStorage) {
+    let storageTheme = loadTheme();
+    currentTheme = storageTheme ? storageTheme : "light";
+  }
+
+  return currentTheme;
+};
+
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 	const [theme, setTheme] = useState<ThemeContextType["theme"]>(
-		loadTheme() || "light"
+		setInitialState
 	);
 
 	const themeValue: ThemeContextType = useMemo(

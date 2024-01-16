@@ -3,7 +3,6 @@
 
 * {
 	font-family: "Plus Jakarta Sans", sans-serif;
-	transition: background-color 0.15s, border-color 0.15s;
 }
 
 :root {
@@ -49,6 +48,10 @@ body {
 	background: var(--color-bg);
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
+
+	* {
+		transition: background-color 0.15s, border-color 0.15s;
+	}
 }
 
 body::-webkit-scrollbar {

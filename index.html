@@ -9,6 +9,10 @@
 </head>
 
 <body>
+  <script>
+    const theme = localStorage.getItem('theme') || 'light';
+    document.body.dataset.theme = theme;
+  </script>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
