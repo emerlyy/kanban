@@ -48,11 +48,15 @@ const BoardFormModal = ({
 
 	useEffect(() => {
 		reset({ name: initialName, columns: initialColumns });
-	}, [initialColumns, initialName]);
+	}, [reset, initialName, initialColumns]);
 
 	return (
 		<Modal isOpened={isOpened} onClose={onClose}>
-			<form onSubmit={handleSubmit(onSubmit)} className={styles.modalForm} autoComplete="off">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className={styles.modalForm}
+				autoComplete="off"
+			>
 				<Title tag="h2" size="l">
 					{title}
 				</Title>

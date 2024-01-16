@@ -17,7 +17,7 @@ export const loadBoards = createAsyncThunk<
 	async (_, { rejectWithValue, dispatch, extra: { api } }) => {
 		try {
 			const boards = await api.getAllBoards();
-			if (!!boards.length) dispatch(setActiveBoard(boards[0]));
+			if (boards.length) dispatch(setActiveBoard(boards[0]));
 			return boards;
 		} catch (err) {
 			if (err instanceof Error) return rejectWithValue(err.message);

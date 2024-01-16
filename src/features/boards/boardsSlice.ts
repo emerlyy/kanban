@@ -58,7 +58,7 @@ const boardsSlice = createSlice({
 				state.status = "received";
 				state.items.push(...action.payload);
 			})
-			.addCase(loadBoards.rejected, (state, action) => {
+			.addCase(loadBoards.rejected, (state) => {
 				state.status = "rejected";
 			});
 	},
