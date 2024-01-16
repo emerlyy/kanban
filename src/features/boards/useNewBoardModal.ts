@@ -5,9 +5,8 @@ import { SubmitHandler } from "react-hook-form";
 import { createBoard } from "./boardsSlice";
 
 export const useNewBoardModal = () => {
-	const [isOpened, openModal, closeModal] = useModal();
-
 	const dispatch = useAppDispatch();
+	const [isOpened, openModal, closeModal] = useModal();
 
 	const onSubmit: SubmitHandler<IBoardFormValues> = (data) => {
 		dispatch(
@@ -19,5 +18,5 @@ export const useNewBoardModal = () => {
 		closeModal();
 	};
 
-	return { openModal, modalProps: { isOpened, closeModal, onSubmit } };
+	return { openModal, modalProps: { isOpened, onClose: closeModal, onSubmit } };
 };
