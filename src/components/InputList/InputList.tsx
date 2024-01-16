@@ -2,10 +2,11 @@ import Button from "@/ui/Button/Button";
 import Input from "@/ui/Input/Input";
 import Text from "@/ui/Text/Text";
 import { nanoid } from "@reduxjs/toolkit";
+import React from "react";
 import {
 	Control,
-	Controller,
 	FieldErrors,
+	FieldValues,
 	UseFormRegister,
 	useFieldArray,
 } from "react-hook-form";
@@ -13,23 +14,26 @@ import styles from "./InputList..module.css";
 
 export type ListInput = { value: string; inputId: ReturnType<typeof nanoid> };
 
+type FormValues = {
+	[K: string]: ListInput[];
+} & FieldValues;
+
 type Props = {
 	label?: string;
-	register: UseFormRegister<any>;
-	control: Control<any>;
-	errors?: FieldErrors<any>;
 	name: string;
+	control: Control<any>;
+	register: UseFormRegister<any>;
+	errors: FieldErrors<FormValues>;
 };
 
-const InputList = ({ label, control, errors, name, register }: Props) => {
+const InputList = ({ label, control, name, register, errors }: Props) => {
 	const { fields, append, remove } = useFieldArray<
+		FormValues,
 		any,
-		string,
 		"id" | "value" | "inputId"
 	>({
 		control,
-		//@ts-ignore
-		name: "columns",
+		name,
 	});
 
 	return (
@@ -45,34 +49,30 @@ const InputList = ({ label, control, errors, name, register }: Props) => {
 			</Text>
 			<div className={styles.inputList}>
 				{fields.map((field, index) => (
-					<Controller
-						name={`${name}.${index}`}
-						key={field.id}
-						control={control}
-						render={({ field: { value, onChange, ...rest } }) => (
-							<Input
-								autoComplete="off"
-								removable
-								value={value.value}
-								onChange={(event) =>
-									onChange({
-										value: event.target.value,
-										inputId: field.inputId,
-									})
-								}
-								onRemove={() => remove(index)}
-								{...rest}
-								//@ts-ignore
-								errorMessage={errors[name]?.[index]?.value.message}
-							/>
-						)}
-					/>
+					<React.Fragment key={field.id}>
+						<Input
+							autoComplete="off"
+							removable
+							{...register(`${name}.${index}.value`, {
+								required: {
+									value: true,
+									message: "Can’t be empty",
+								},
+							})}
+							onRemove={() => remove(index)}
+							//@ts-expect-error 
+							errorMessage={errors[name]?.[index]?.value?.message}
+						/>
+						<div
+							style={{ display: "none" }}
+							{...register(`${name}.${index}.inputId`)}
+						/>
+					</React.Fragment>
 				))}
 				<Button
 					type="button"
 					color="secondary"
 					onClick={() => {
-						//@ts-ignore
 						append({ value: "", inputId: nanoid() });
 					}}
 				>
