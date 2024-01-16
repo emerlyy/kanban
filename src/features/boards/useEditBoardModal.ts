@@ -1,17 +1,18 @@
 import { IBoardFormValues } from "@/features/boards/BoardFormModal/BoardFormModal";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useModal } from "@/hooks/useModal";
 import { Column } from "@/types";
 import { nanoid } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { selectActiveBoard } from "./boardSelectors";
 import { editBoard } from "./boardsSlice";
+import { useBoards } from "./useBoards";
 
 export const useEditBoardModal = () => {
-	const [isOpened, openModal, closeModal] = useModal();
 	const dispatch = useAppDispatch();
-	const activeBoard = useAppSelector(selectActiveBoard);
+	const [isOpened, openModal, closeModal] = useModal();
+	const { activeBoard } = useBoards();
+
 	const initialColumns = useMemo(
 		() =>
 			activeBoard?.columns.map((col) => ({

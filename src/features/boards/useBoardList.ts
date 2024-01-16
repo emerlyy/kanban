@@ -1,13 +1,12 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch } from "@/hooks/reduxHooks";
 import { Board } from "@/types";
-import { selectActiveBoard, selectAllBoards } from "./boardSelectors";
 import { setActiveBoard } from "./boardsSlice";
+import { useBoards } from "./useBoards";
 
 export const useBoardList = () => {
 	const dispatch = useAppDispatch();
 
-	const boards = useAppSelector(selectAllBoards);
-	const activeBoard = useAppSelector(selectActiveBoard);
+	const { boards, activeBoard } = useBoards();
 
 	const changeBoard = (board: Board) => () => {
 		if (board !== activeBoard) {
