@@ -8,10 +8,13 @@
   <title>Kanban</title>
 </head>
 
-<body>
+<body class="preload">
   <script>
     const theme = localStorage.getItem('theme') || 'light';
     document.body.dataset.theme = theme;
+    window.addEventListener('load',() => {
+      document.querySelector('body').classList.remove('preload')
+    })
   </script>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
