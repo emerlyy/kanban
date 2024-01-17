@@ -2,10 +2,36 @@
 	width: 280px;
 	display: flex;
 	flex-direction: column;
+
+	&:nth-child(3n + 1) {
+		--point-color: #49c4e5;
+	}
+
+	&:nth-child(3n + 2) {
+		--point-color: #8471f2;
+	}
+
+	&:nth-child(3n + 3) {
+		--point-color: #67e2ae;
+	}
 }
 
 .columnTitle {
+	position: relative;
 	margin-bottom: 24px;
+	padding-left: 27px;
+
+	&:before {
+		content: "";
+		position: absolute;
+		aspect-ratio: 1;
+		width: 15px;
+		left: 0;
+		top: 50%;
+		translate: 0 -50%;
+		border-radius: 50%;
+		background-color: var(--point-color, gray);
+	}
 }
 
 .tasksWrapper {
