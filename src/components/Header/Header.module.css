@@ -6,6 +6,7 @@
 	display: flex;
 	border-bottom: 1px solid var(--color-lines);
 	background: var(--color-bg-elements);
+	z-index: 1;
 }
 
 .sidebarActive {
