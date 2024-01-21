@@ -1,0 +1,62 @@
+.checkboxWrapper {
+	position: relative;
+	display: block;
+	min-height: 40px;
+	padding: 12px 16px 12px 44px;
+	cursor: pointer;
+
+	background-color: var(--color-bg);
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+
+		&:checked ~ .checkmark {
+			background-color: var(--color-accent);
+		}
+
+		&:checked ~ .checkmark::after {
+			display: block;
+		}
+	}
+
+	&:hover {
+		background-color: color-mix(in srgb, var(--color-accent), transparent 75%);
+	}
+
+	&:has(input:checked) {
+		span:first-of-type {
+			text-decoration: line-through;
+			opacity: 0.5;
+		}
+	}
+}
+
+.checkmark {
+	position: absolute;
+	top: 50%;
+	left: 12px;
+	height: 16px;
+	width: 16px;
+	translate: 0 -50%;
+	background-color: var(--color-bg-elements);
+	border-radius: 2px;
+	border: 1px solid color-mix(in srgb, var(--color-gray), transparent 75%);
+
+	&::after {
+		content: url("data:image/svg+xml; utf8, <svg width='10' height='9' xmlns='http://www.w3.org/2000/svg'><path stroke='white' stroke-width='2' fill='none' d='m1.276 3.066 2.756 2.756 5-5'/></svg>");
+		position: absolute;
+		display: none;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+	}
+}
