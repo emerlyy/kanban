@@ -1,0 +1,99 @@
+.selectWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	.control {
+		font-family: "Plus Jakarta Sans";
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 23px;
+		border-color: color-mix(in srgb, var(--color-gray), transparent 75%);
+		background-color: transparent;
+		cursor: pointer;
+
+		&:hover {
+			border-color: var(--color-accent);
+		}
+
+		&.focused {
+			box-shadow: 0 0 0 1px var(--color-accent);
+		}
+
+		.input {
+			margin: 0;
+			padding: 0;
+		}
+
+		.valueContainer {
+			padding: 8px 16px;
+			margin: 0;
+			color: var(--color-text);
+		}
+
+		.singleValue {
+			color: inherit;
+		}
+
+		.separator {
+			background: none;
+		}
+
+		.indicatorsContainer {
+			margin-inline: 16px;
+		}
+
+		.option {
+			background: none;
+		}
+	}
+	.menu {
+		margin-block: 10px;
+		box-shadow: none;
+		overflow: hidden;
+		background: none;
+		border-radius: 8px;
+	}
+
+	.menuList {
+		padding-block: 8px;
+		color: var(--color-gray);
+		font-family: "Plus Jakarta Sans";
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 23px;
+		background-color: var(--color-bg-select);
+		border: none;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0px 10px 20px 0px
+			color-mix(in srgb, var(--color-gray), transparent 75%);
+	}
+
+	.option {
+		padding: 8px 16px;
+		cursor: pointer;
+
+		&.focused {
+			background-color: color-mix(
+				in srgb,
+				var(--color-accent),
+				transparent 90%
+			);
+		}
+
+		&.selected {
+			color: var(--color-gray);
+			background-color: color-mix(
+				in srgb,
+				var(--color-accent),
+				transparent 90%
+			);
+		}
+	}
+
+	.dropdownIcon {
+	}
+}

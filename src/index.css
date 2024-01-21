@@ -2,11 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
 
 * {
+	box-sizing: border-box;
 	font-family: "Plus Jakarta Sans", sans-serif;
 	transition: background-color 0.15s, border-color 0.15s;
 }
 
-.preload{
+.preload {
 	-webkit-transition: none !important;
 	-moz-transition: none !important;
 	-ms-transition: none !important;
@@ -49,6 +50,7 @@
 body {
 	--color-bg: var(--color-gray-light);
 	--color-bg-elements: var(--color-light);
+	--color-bg-select: var(--color-light);
 	--color-lines: var(--color-lines-light);
 	--color-text: var(--color-dark);
 	--color-label: var(--color-gray);
@@ -65,6 +67,7 @@ body::-webkit-scrollbar {
 body[data-theme="dark"] {
 	--color-bg: var(--color-gray-very-dark);
 	--color-bg-elements: var(--color-gray-dark);
+	--color-bg-select: var(--color-gray-very-dark);
 	--color-lines: var(--color-lines-dark);
 	--color-text: var(--color-light);
 	--color-label: var(--color-light);
