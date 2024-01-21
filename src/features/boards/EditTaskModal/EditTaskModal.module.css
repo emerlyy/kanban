@@ -1,0 +1,24 @@
+.modalForm {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 100%;
+}
+
+.titleWrapper{
+	display: flex;
+	gap: 18px;
+}
+
+.settings {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.subtasksList{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 16px;
+}

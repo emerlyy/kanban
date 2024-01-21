@@ -1,4 +1,4 @@
-import icon from "@/assets/icon-vertical-ellipsis.svg";
+import SettingsIcon from "@/assets/icon-vertical-ellipsis.svg";
 import { useTheme } from "@/context/ThemeContext";
 import TaskFormModal from "@/features/boards/TaskFormModal/TaskFormModal";
 import { selectActiveBoard } from "@/features/boards/boardSelectors";
@@ -44,7 +44,7 @@ const Header = () => {
 							+ Add New Task
 						</Button>
 						<button className={styles.settings}>
-							<img src={icon} alt="" />
+							<img src={SettingsIcon} alt="" />
 						</button>
 					</div>
 				</div>

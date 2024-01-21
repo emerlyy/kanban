@@ -1,9 +1,9 @@
-import { Column as TColumn } from "@/types";
+import { LocalColumn } from "@/types";
 import Task from "../Task/Task";
 import Title from "../Title/Title";
 import styles from "./Column.module.css";
 
-type Props = Pick<TColumn, "name" | "tasks">;
+type Props = Pick<LocalColumn, "name" | "tasks">;
 
 const Column = ({ name, tasks }: Props) => {
 	return (
@@ -13,11 +13,7 @@ const Column = ({ name, tasks }: Props) => {
 			</Title>
 			<ul className={styles.tasksWrapper}>
 				{tasks.map((task, index) => (
-					<Task
-						key={`${task.title}-${index}`}
-						title={task.title}
-						subtasks={task.subtasks}
-					/>
+					<Task key={`${task.title}-${index}`} task={task} />
 				))}
 			</ul>
 		</div>

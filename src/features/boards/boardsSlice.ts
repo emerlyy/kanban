@@ -71,6 +71,52 @@ const boardsSlice = createSlice({
 			);
 			column?.tasks.push(action.payload.task);
 		},
+		moveTask: (
+			state,
+			action: PayloadAction<{
+				boardId: string;
+				oldColumnId: string;
+				nextColumnId: string;
+				taskId: string;
+			}>
+		) => {
+			const board = state.items.find((b) => b.id === action.payload.boardId);
+
+			const oldColumn = board?.columns.find(
+				(col) => col.id === action.payload.oldColumnId
+			);
+			const nextColumn = board?.columns.find(
+				(col) => col.id === action.payload.nextColumnId
+			);
+
+			if (oldColumn && nextColumn) {
+				const task = oldColumn.tasks.find(
+					(task) => task.id === action.payload.taskId
+				);
+
+				if (oldColumn.tasks) {
+					oldColumn.tasks = oldColumn.tasks.filter(
+						(task) => task.id !== action.payload.taskId
+					);
+				}
+
+				if (task) {
+					task.status = nextColumn.name;
+					nextColumn.tasks.push(task);
+				}
+			}
+		},
+		toggleSubtask: (state, action: PayloadAction<string>) => {
+			state.items.forEach((b) =>
+				b.columns.forEach((c) =>
+					c.tasks.forEach((t) =>
+						t.subtasks.forEach(
+							(s) => s.id === action.payload && (s.isCompleted = !s.isCompleted)
+						)
+					)
+				)
+			);
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -88,7 +134,13 @@ const boardsSlice = createSlice({
 	},
 });
 
-export const { createBoard, setActiveBoard, editBoard, addTask } =
-	boardsSlice.actions;
+export const {
+	createBoard,
+	setActiveBoard,
+	editBoard,
+	addTask,
+	moveTask,
+	toggleSubtask,
+} = boardsSlice.actions;
 
 export default boardsSlice.reducer;

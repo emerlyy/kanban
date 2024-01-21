@@ -110,10 +110,10 @@ const TaskFormModal = ({
 				<Controller
 					control={control}
 					name="status"
-					defaultValue={!!status.length ? status[0].value : undefined}
+					defaultValue={status.length ? status[0].value : undefined}
 					render={({ field: { ref, value, onChange } }) => (
 						<Select
-						label="Status"
+							label="Status"
 							ref={ref}
 							options={status}
 							value={status?.find((s) => s.value === value)}

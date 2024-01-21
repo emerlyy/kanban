@@ -11,11 +11,9 @@ export type Column = {
 export type Task = {
 	title: string;
 	description: string;
-	status: TaskStatus;
+	status: string;
 	subtasks: Subtask[];
 };
-
-type TaskStatus = "Todo" | "Doing" | "Done";
 
 type Subtask = {
 	title: string;
@@ -38,7 +36,7 @@ export type LocalTask = {
 	id: string;
 	title: string;
 	description: string;
-	status: TaskStatus;
+	status: string;
 	subtasks: LocalSubtask[];
 };
 

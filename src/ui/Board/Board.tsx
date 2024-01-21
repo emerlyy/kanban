@@ -1,4 +1,4 @@
-import { Board as TBoard } from "@/types";
+import { LocalBoard as TBoard } from "@/types";
 import Column from "@/ui/Column/Column";
 import NewColumnButton from "../../features/boards/NewColumnButton/NewColumnButton";
 import styles from "./Board.module.css";

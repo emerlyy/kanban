@@ -22,7 +22,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 				)}
 				<textarea
 					ref={ref}
-          rows={4}
+					rows={4}
 					className={textareaStyles}
 					{...props}
 				></textarea>
