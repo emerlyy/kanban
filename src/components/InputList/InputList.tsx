@@ -21,12 +21,20 @@ type FormValues = {
 type Props = {
 	label?: string;
 	name: string;
+	buttonText: string;
 	control: Control<any>;
 	register: UseFormRegister<any>;
 	errors: FieldErrors<FormValues>;
 };
 
-const InputList = ({ label, control, name, register, errors }: Props) => {
+const InputList = ({
+	label,
+	control,
+	name,
+	buttonText,
+	register,
+	errors,
+}: Props) => {
 	const { fields, append, remove } = useFieldArray<
 		FormValues,
 		any,
@@ -60,7 +68,7 @@ const InputList = ({ label, control, name, register, errors }: Props) => {
 								},
 							})}
 							onRemove={() => remove(index)}
-							//@ts-expect-error 
+							//@ts-expect-error
 							errorMessage={errors[name]?.[index]?.value?.message}
 						/>
 						<div
@@ -76,7 +84,7 @@ const InputList = ({ label, control, name, register, errors }: Props) => {
 						append({ value: "", inputId: nanoid() });
 					}}
 				>
-					+ Add New Column
+				{buttonText}
 				</Button>
 			</div>
 		</div>

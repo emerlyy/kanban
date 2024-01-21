@@ -76,6 +76,7 @@ const BoardFormModal = ({
 				<InputList
 					name="columns"
 					label="Columns"
+					buttonText="+ Add New Column"
 					control={control}
 					register={register}
 					errors={errors}

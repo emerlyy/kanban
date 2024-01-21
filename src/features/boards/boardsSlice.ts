@@ -1,4 +1,4 @@
-import { LocalBoard } from "@/types";
+import { LocalBoard, LocalTask } from "@/types";
 import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
 import { loadBoards } from "./boardsAsyncActions";
 
@@ -55,6 +55,22 @@ const boardsSlice = createSlice({
 				board.columns = action.payload.newColumns;
 			}
 		},
+		addTask: (
+			state,
+			action: PayloadAction<{
+				boardId: string;
+				columnId: string;
+				task: LocalTask;
+			}>
+		) => {
+			const board = state.items.find(
+				(board) => board.id === action.payload.boardId
+			);
+			const column = board?.columns.find(
+				(col) => col.id === action.payload.columnId
+			);
+			column?.tasks.push(action.payload.task);
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -72,6 +88,7 @@ const boardsSlice = createSlice({
 	},
 });
 
-export const { createBoard, setActiveBoard, editBoard } = boardsSlice.actions;
+export const { createBoard, setActiveBoard, editBoard, addTask } =
+	boardsSlice.actions;
 
 export default boardsSlice.reducer;
