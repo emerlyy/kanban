@@ -2,7 +2,7 @@ import InputList, { ListInput } from "@/components/InputList/InputList";
 import Modal, { ModalProps } from "@/components/Modal/Modal";
 import Button from "@/ui/Button/Button";
 import Input from "@/ui/Input/Input";
-import Select, { StatusOption } from "@/ui/Select/Select";
+import Select, { SelectOption } from "@/ui/Select/Select";
 import Textarea from "@/ui/Textarea/Textarea";
 import Title from "@/ui/Title/Title";
 import { useEffect, useMemo } from "react";
@@ -14,7 +14,7 @@ export interface ITaskFormValues {
 	name: string;
 	description: string;
 	subtasks: ListInput[];
-	status: string;
+	status: SelectOption;
 }
 
 type Props = {
@@ -64,7 +64,7 @@ const TaskFormModal = ({
 
 	const { activeBoard } = useBoards();
 
-	const status: StatusOption[] = useMemo(
+	const status: SelectOption[] = useMemo(
 		() =>
 			activeBoard?.columns.map((col) => ({
 				value: col.id,
@@ -110,14 +110,14 @@ const TaskFormModal = ({
 				<Controller
 					control={control}
 					name="status"
-					defaultValue={status.length ? status[0].value : undefined}
+					defaultValue={status.length ? status[0] : undefined}
 					render={({ field: { ref, value, onChange } }) => (
 						<Select
 							label="Status"
 							ref={ref}
 							options={status}
-							value={status?.find((s) => s.value === value)}
-							onChange={(val) => onChange(val?.value)}
+							value={status?.find((s) => s.value === value.value)}
+							onChange={(val) => onChange(val)}
 							defaultValue={status && status[0]}
 						/>
 					)}

@@ -3,16 +3,16 @@ import CSelect, { ClassNamesConfig, Props, SelectInstance } from "react-select";
 import Text from "../Text/Text";
 import styles from "./Select.module.css";
 
-export type StatusOption = {
+export type SelectOption = {
 	value: string;
 	label: string;
 };
 
 type SelectProps = {
 	label?: string;
-} & Props<StatusOption, false>;
+} & Props<SelectOption, false>;
 
-const classNames: ClassNamesConfig<StatusOption, false> = {
+const classNames: ClassNamesConfig<SelectOption, false> = {
 	control: (state) =>
 		`${styles.control} ${state.isFocused ? ` ${styles.focused}` : ""}`,
 	valueContainer: () => styles.valueContainer,
@@ -28,7 +28,7 @@ const classNames: ClassNamesConfig<StatusOption, false> = {
 	menuList: () => styles.menuList,
 };
 
-const Select = forwardRef<SelectInstance<StatusOption, false>, SelectProps>(
+const Select = forwardRef<SelectInstance<SelectOption, false>, SelectProps>(
 	({ label, ...props }, ref) => {
 		return (
 			<div className={styles.selectWrapper}>

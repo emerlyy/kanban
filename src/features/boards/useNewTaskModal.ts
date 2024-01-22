@@ -12,12 +12,11 @@ export const useNewTaskModal = () => {
 	const { activeBoard } = useBoards();
 
 	const onSubmit: SubmitHandler<ITaskFormValues> = (data) => {
-		console.log(data)
 		if (activeBoard) {
 			dispatch(
 				addTask({
 					boardId: activeBoard.id,
-					columnId: data.status,
+					columnId: data.status.value,
 					task: {
 						id: nanoid(),
 						title: data.name,
@@ -27,7 +26,7 @@ export const useNewTaskModal = () => {
 							title: subtask.value,
 							isCompleted: false,
 						})),
-						status: "Todo",
+						status: data.status.label,
 					},
 				})
 			);
