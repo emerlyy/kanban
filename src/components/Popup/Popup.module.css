@@ -1,0 +1,27 @@
+.popupWrapper {
+	position: relative;
+}
+
+.popupButton {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.popupBody {
+	--top-offset: 24px;
+	position: absolute;
+	padding: 16px;
+	min-width: 40px;
+	top: 100%;
+	right: 0;
+	translate: 0 var(--top-offset);
+	border-radius: 8px;
+	background-color: var(--color-bg-elements);
+	box-shadow: 0px 10px 20px 0px rgba(54, 78, 126, 0.25);
+
+	&.center {
+		right: 50%;
+		translate: 50% var(--top-offset);
+	}
+}
