@@ -1,21 +1,16 @@
-import { useEffect } from "react";
 import styles from "./App.module.css";
 import Header from "./components/Header/Header";
 import ActiveBoardDisplay from "./features/boards/ActiveBoardDisplay";
-import { loadBoards } from "./features/boards/boardsAsyncActions";
+import { useLoadBoards } from "./features/boards/useLoadBoard";
 import Menu from "./features/menu/Menu/Menu";
 import ShowMenuLabel from "./features/menu/ShowMenuLabel/ShowMenuLabel";
 import { selectMenuState } from "./features/menu/menuSelectors";
-import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { useAppSelector } from "./hooks/reduxHooks";
 
 const App = () => {
 	const isMenuOpened = useAppSelector(selectMenuState);
 
-	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		dispatch(loadBoards());
-	}, [dispatch]);
+	useLoadBoards();
 
 	return (
 		<>
