@@ -1,3 +1,4 @@
+import { useKeyPress } from "@/hooks/useKeyPress";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import React, { useRef } from "react";
 import Overlay from "../Overlay/Overlay";
@@ -20,7 +21,7 @@ const Modal = ({
 }: ModalProps) => {
 	const ref = useRef<HTMLDivElement>(null);
 	useOutsideClick(ref, onClose, closeOnOutsideClick && isOpened);
-
+	useKeyPress("Escape", onClose, isOpened);
 	if (!isOpened) return null;
 
 	return (
