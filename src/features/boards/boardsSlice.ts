@@ -34,9 +34,7 @@ const boardsSlice = createSlice({
 				})),
 			};
 			state.items.push(newBoard);
-			if (!state.active) {
-				state.active = newBoard.id;
-			}
+			state.active = newBoard.id;
 		},
 		deleteBoard: (state, action: PayloadAction<LocalBoard["id"]>) => {
 			state.items = state.items.filter((board) => board.id !== action.payload);
