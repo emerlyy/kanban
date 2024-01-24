@@ -22,7 +22,6 @@ const Header = () => {
 
 	const { openModal: openNewTaskModal, modalProps: newTaskModalProps } =
 		useNewTaskModal();
-	const isButtonsActive = activeBoard && !!activeBoard.columns.length;
 
 	const { openModal: openEditBoardModal, modalProps: editBoardModalProps } =
 		useEditBoardModal();
@@ -31,6 +30,9 @@ const Header = () => {
 		openModal: openDeleteActiveBoardModal,
 		modalProps: deleteActiveBoardModalProps,
 	} = useDeleteModal(deleteBoard(activeBoard?.id || ""));
+
+	const isTaskButtonDisabled = !activeBoard?.columns.length;
+	const isPopupDisabled = !activeBoard;
 
 	return (
 		<>
@@ -52,7 +54,7 @@ const Header = () => {
 							color="primary"
 							size="l"
 							onClick={openNewTaskModal}
-							disabled={!isButtonsActive}
+							disabled={isTaskButtonDisabled}
 						>
 							+ Add New Task
 						</Button>
@@ -60,7 +62,7 @@ const Header = () => {
 							type="board"
 							onEdit={openEditBoardModal}
 							onDelete={openDeleteActiveBoardModal}
-							disabled={!isButtonsActive}
+							disabled={isPopupDisabled}
 						/>
 					</div>
 				</div>
