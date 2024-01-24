@@ -1,4 +1,4 @@
-import { IBoardFormValues } from "@/features/boards/BoardFormModal/BoardFormModal";
+import { IBoardFormValues } from "@/features/boards/modals/BoardFormModal/BoardFormModal";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useModal } from "@/hooks/useModal";
 import { SubmitHandler } from "react-hook-form";

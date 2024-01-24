@@ -1,4 +1,4 @@
-import BoardFormModal from "@/features/boards/BoardFormModal/BoardFormModal";
+import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
 import BoardListItem from "@/ui/BoardsListItem/BoardsListItem";
 import Title from "@/ui/Title/Title";
 import { useBoardList } from "../useBoardList";

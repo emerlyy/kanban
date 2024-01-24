@@ -38,6 +38,11 @@ const boardsSlice = createSlice({
 				state.active = newBoard.id;
 			}
 		},
+		deleteBoard: (state, action: PayloadAction<LocalBoard["id"]>) => {
+			state.items = state.items.filter((board) => board.id !== action.payload);
+			if (state.active === action.payload)
+				state.active = state.items[0]?.id || null;
+		},
 		setActiveBoard: (state, action: PayloadAction<BoardsState["active"]>) => {
 			state.active = action.payload;
 		},
@@ -70,6 +75,65 @@ const boardsSlice = createSlice({
 				(col) => col.id === action.payload.columnId
 			);
 			column?.tasks.push(action.payload.task);
+		},
+		deleteTask: (
+			state,
+			action: PayloadAction<{
+				boardId: string;
+				columnId: string;
+				taskId: string;
+			}>
+		) => {
+			const board = state.items.find(
+				(board) => board.id === action.payload.boardId
+			);
+			const column = board?.columns.find(
+				(col) => col.id === action.payload.columnId
+			);
+
+			if (column?.tasks) {
+				column.tasks = column?.tasks.filter(
+					(task) => task.id !== action.payload.taskId
+				);
+			}
+		},
+		editTask: (
+			state,
+			action: PayloadAction<{
+				boardId: string;
+				columnId: string;
+				taskId: string;
+				newTask: LocalTask;
+				newColumnId?: string;
+			}>
+		) => {
+			const { boardId, columnId, taskId, newTask, newColumnId } =
+				action.payload;
+
+			const board = state.items.find((board) => board.id === boardId);
+			const oldColumn = board?.columns.find((col) => col.id === columnId);
+
+			if (oldColumn) {
+				if (newColumnId) {
+					oldColumn.tasks = oldColumn.tasks.filter(
+						(task) => task.id !== taskId
+					);
+
+					const newColumn = board?.columns.find(
+						(col) => col.id === newColumnId
+					);
+
+					newColumn?.tasks.push(newTask);
+				} else {
+					const oldTask = oldColumn.tasks.find((task) => task.id === taskId);
+
+					if (oldTask) {
+						oldTask.title = newTask.title;
+						oldTask.description = newTask.description;
+						oldTask.subtasks = newTask.subtasks;
+					}
+				}
+			}
 		},
 		moveTask: (
 			state,
@@ -136,9 +200,12 @@ const boardsSlice = createSlice({
 
 export const {
 	createBoard,
+	deleteBoard,
 	setActiveBoard,
 	editBoard,
 	addTask,
+	deleteTask,
+	editTask,
 	moveTask,
 	toggleSubtask,
 } = boardsSlice.actions;

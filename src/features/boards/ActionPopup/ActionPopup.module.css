@@ -1,0 +1,12 @@
+.actionPopup {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	button {
+		text-align: start;
+		background: none;
+		border: none;
+		cursor: pointer;
+	}
+}

@@ -31,9 +31,3 @@
 	align-items: center;
 	gap: 16px;
 }
-
-.settings {
-	border: none;
-	background: none;
-	cursor: pointer;
-}

@@ -10,6 +10,10 @@
 	gap: 18px;
 }
 
+.title{
+	flex-grow: 1;
+}
+
 .settings {
 	border: none;
 	background: none;

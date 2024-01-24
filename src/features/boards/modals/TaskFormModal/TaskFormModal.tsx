@@ -5,37 +5,39 @@ import Input from "@/ui/Input/Input";
 import Select, { SelectOption } from "@/ui/Select/Select";
 import Textarea from "@/ui/Textarea/Textarea";
 import Title from "@/ui/Title/Title";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useBoards } from "../useBoards";
+import { useBoards } from "../../useBoards";
 import styles from "./TaskFormModal.module.css";
 
 export interface ITaskFormValues {
-	name: string;
+	title: string;
 	description: string;
 	subtasks: ListInput[];
 	status: SelectOption;
 }
 
-type Props = {
+export type EditTaskModalProps = {
 	title: string;
-	submiButtonText: string;
+	submitButtonText: string;
 	onSubmit: SubmitHandler<ITaskFormValues>;
-	initialName?: string;
+	initialTitle?: string;
 	initialDescription?: string;
 	initialSubtasks?: ListInput[];
+	initialStatus?: SelectOption;
 } & Pick<ModalProps, "isOpened" | "onClose">;
 
 const TaskFormModal = ({
 	title,
-	submiButtonText,
+	submitButtonText,
 	onSubmit,
 	isOpened,
 	onClose,
-	initialName,
+	initialTitle,
 	initialDescription,
 	initialSubtasks,
-}: Props) => {
+	initialStatus,
+}: EditTaskModalProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -45,9 +47,10 @@ const TaskFormModal = ({
 	} = useForm<ITaskFormValues>({
 		shouldUnregister: true,
 		defaultValues: {
-			name: initialName,
+			title: initialTitle,
 			description: initialDescription,
 			subtasks: initialSubtasks,
+			status: initialStatus,
 		},
 		resetOptions: {
 			keepDefaultValues: true,
@@ -56,22 +59,18 @@ const TaskFormModal = ({
 
 	useEffect(() => {
 		reset({
-			name: initialName,
+			title: initialTitle,
 			description: initialDescription,
 			subtasks: initialSubtasks,
 		});
-	}, [reset, initialName, initialDescription, initialSubtasks]);
+	}, [reset, initialTitle, initialDescription, initialSubtasks]);
 
 	const { activeBoard } = useBoards();
 
-	const status: SelectOption[] = useMemo(
-		() =>
-			activeBoard?.columns.map((col) => ({
-				value: col.id,
-				label: col.name,
-			})) || [],
-		[activeBoard]
-	);
+	const options = activeBoard?.columns.map((col) => ({
+		value: col.id,
+		label: col.name,
+	}));
 
 	return (
 		<Modal isOpened={isOpened} onClose={onClose}>
@@ -86,13 +85,13 @@ const TaskFormModal = ({
 				<Input
 					label="Name"
 					placeholder="e.g. Take coffee break"
-					{...register("name", {
+					{...register("title", {
 						required: {
 							value: true,
 							message: "Can’t be empty",
 						},
 					})}
-					errorMessage={errors.name?.message}
+					errorMessage={errors.title?.message}
 				/>
 				<Textarea
 					label="Description"
@@ -110,20 +109,19 @@ const TaskFormModal = ({
 				<Controller
 					control={control}
 					name="status"
-					defaultValue={status.length ? status[0] : undefined}
+					defaultValue={initialStatus}
 					render={({ field: { ref, value, onChange } }) => (
 						<Select
 							label="Status"
 							ref={ref}
-							options={status}
-							value={status?.find((s) => s.value === value.value)}
+							options={options}
+							value={options?.find((option) => option.value === value?.value)}
 							onChange={(val) => onChange(val)}
-							defaultValue={status && status[0]}
 						/>
 					)}
 				/>
 				<Button color="primary" size="s" type="submit">
-					{submiButtonText}
+					{submitButtonText}
 				</Button>
 			</form>
 		</Modal>

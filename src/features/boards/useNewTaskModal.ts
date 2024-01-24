@@ -2,8 +2,8 @@ import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useModal } from "@/hooks/useModal";
 import { nanoid } from "@reduxjs/toolkit";
 import { SubmitHandler } from "react-hook-form";
-import { ITaskFormValues } from "./TaskFormModal/TaskFormModal";
 import { addTask } from "./boardsSlice";
+import { ITaskFormValues } from "./modals/TaskFormModal/TaskFormModal";
 import { useBoards } from "./useBoards";
 
 export const useNewTaskModal = () => {
@@ -19,7 +19,7 @@ export const useNewTaskModal = () => {
 					columnId: data.status.value,
 					task: {
 						id: nanoid(),
-						title: data.name,
+						title: data.title,
 						description: data.description,
 						subtasks: data.subtasks.map((subtask) => ({
 							id: subtask.inputId,

@@ -6,13 +6,20 @@ import styles from "./Modal.module.css";
 export type ModalProps = {
 	isOpened: boolean;
 	onClose: () => void;
+	closeOnOutsideClick?: boolean;
 	className?: string;
 	children?: React.ReactNode;
 };
 
-const Modal = ({ isOpened, onClose, className, children }: ModalProps) => {
+const Modal = ({
+	isOpened,
+	onClose,
+	closeOnOutsideClick = true,
+	className,
+	children,
+}: ModalProps) => {
 	const ref = useRef<HTMLDivElement>(null);
-	useOutsideClick(ref, onClose, isOpened);
+	useOutsideClick(ref, onClose, closeOnOutsideClick && isOpened);
 
 	if (!isOpened) return null;
 

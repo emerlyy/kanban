@@ -1,5 +1,5 @@
-import BoardFormModal from "@/features/boards/BoardFormModal/BoardFormModal";
-import Title from "../../../ui/Title/Title";
+import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
+import Title from "@/ui/Title/Title";
 import { useEditBoardModal } from "../useEditBoardModal";
 import styles from "./NewColumnButton.module.css";
 

@@ -1,16 +1,18 @@
-import EditTaskModal from "@/features/boards/EditTaskModal/EditTaskModal";
+import TaskModal from "@/features/boards/modals/TaskModal/TaskModal";
 import { useModal } from "@/hooks/useModal";
-import { LocalTask } from "@/types";
+import { LocalColumn, LocalTask } from "@/types";
 import Text from "../Text/Text";
 import Title from "../Title/Title";
 import styles from "./Task.module.css";
 
 type Props = {
 	task: LocalTask;
+	columnId: LocalColumn["id"];
 };
 
-const Task = ({ task }: Props) => {
+const Task = ({ task, columnId }: Props) => {
 	const [isOpened, openModal, closeModal] = useModal();
+	
 	const completedSubtasks = task.subtasks.filter(
 		(subtask) => subtask.isCompleted
 	).length;
@@ -25,7 +27,12 @@ const Task = ({ task }: Props) => {
 					{completedSubtasks} of {task.subtasks.length} subtasks
 				</Text>
 			</button>
-			<EditTaskModal isOpened={isOpened} onClose={closeModal} task={task} />
+			<TaskModal
+				isOpened={isOpened}
+				onClose={closeModal}
+				task={task}
+				initialStatusId={columnId}
+			/>
 		</>
 	);
 };

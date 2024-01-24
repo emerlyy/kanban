@@ -10,14 +10,8 @@ type Props = {
 const Board = ({ board }: Props) => {
 	return (
 		<div className={styles.board}>
-			{board?.columns.map((col, index) => {
-				return (
-					<Column
-						key={`${col.name}-${index}`}
-						name={col.name}
-						tasks={col.tasks}
-					/>
-				);
+			{board?.columns.map((column) => {
+				return <Column key={column.id} column={column} />;
 			})}
 			<NewColumnButton />
 		</div>

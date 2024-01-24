@@ -1,7 +1,12 @@
-import SettingsIcon from "@/assets/icon-vertical-ellipsis.svg";
+import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import { useTheme } from "@/context/ThemeContext";
-import TaskFormModal from "@/features/boards/TaskFormModal/TaskFormModal";
+import ActionPopup from "@/features/boards/ActionPopup/ActionPopup";
 import { selectActiveBoard } from "@/features/boards/boardSelectors";
+import { deleteBoard } from "@/features/boards/boardsSlice";
+import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
+import TaskFormModal from "@/features/boards/modals/TaskFormModal/TaskFormModal";
+import { useDeleteModal } from "@/features/boards/useDeleteModal";
+import { useEditBoardModal } from "@/features/boards/useEditBoardModal";
 import { useNewTaskModal } from "@/features/boards/useNewTaskModal";
 import { selectMenuState } from "@/features/menu/menuSelectors";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -15,9 +20,17 @@ const Header = () => {
 	const isMenuOpened = useAppSelector(selectMenuState);
 	const activeBoard = useAppSelector(selectActiveBoard);
 
-	const { openModal, modalProps } = useNewTaskModal();
+	const { openModal: openNewTaskModal, modalProps: newTaskModalProps } =
+		useNewTaskModal();
+	const isButtonsActive = activeBoard && !!activeBoard.columns.length;
 
-	const isNewTaskButtonActive = activeBoard && !!activeBoard.columns.length;
+	const { openModal: openEditBoardModal, modalProps: editBoardModalProps } =
+		useEditBoardModal();
+
+	const {
+		openModal: openDeleteActiveBoardModal,
+		modalProps: deleteActiveBoardModalProps,
+	} = useDeleteModal(deleteBoard(activeBoard?.id || ""));
 
 	return (
 		<>
@@ -38,21 +51,34 @@ const Header = () => {
 						<Button
 							color="primary"
 							size="l"
-							onClick={openModal}
-							disabled={!isNewTaskButtonActive}
+							onClick={openNewTaskModal}
+							disabled={!isButtonsActive}
 						>
 							+ Add New Task
 						</Button>
-						<button className={styles.settings}>
-							<img src={SettingsIcon} alt="" />
-						</button>
+						<ActionPopup
+							type="board"
+							onEdit={openEditBoardModal}
+							onDelete={openDeleteActiveBoardModal}
+							disabled={!isButtonsActive}
+						/>
 					</div>
 				</div>
 			</div>
 			<TaskFormModal
 				title="Add New Task"
-				submiButtonText="Create Task"
-				{...modalProps}
+				submitButtonText="Create Task"
+				{...newTaskModalProps}
+			/>
+			<BoardFormModal
+				title="Edit Board"
+				submiButtonText="Save Changes"
+				{...editBoardModalProps}
+			/>
+			<DeleteModal
+				type="board"
+				name={activeBoard?.name || ""}
+				{...deleteActiveBoardModalProps}
 			/>
 		</>
 	);
