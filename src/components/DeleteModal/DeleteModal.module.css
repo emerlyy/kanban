@@ -1,0 +1,14 @@
+.deleteModal {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.buttonsWrapper {
+	display: flex;
+	gap: 16px;
+
+	button {
+		flex-grow: 1;
+	}
+}
