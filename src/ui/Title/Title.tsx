@@ -1,7 +1,7 @@
 import styles from "./Title.module.css";
 
 type TitleSize = "xl" | "l" | "m" | "s";
-type TitleColor = "primary" | "light" | "dark" | "gray";
+type TitleColor = "primary" | "light" | "dark" | "gray" | 'red';
 
 type Props = {
 	tag?: React.ElementType;

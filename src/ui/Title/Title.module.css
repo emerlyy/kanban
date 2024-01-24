@@ -41,3 +41,7 @@
 .gray {
 	color: var(--color-gray);
 }
+
+.red {
+	color: var(--color-red);
+}
