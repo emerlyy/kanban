@@ -8,12 +8,14 @@ type BoardsState = {
 	active: LocalBoard["id"] | null;
 	items: LocalBoard[];
 	status: Status;
+	error: string | null;
 };
 
 const initialState: BoardsState = {
 	active: null,
 	items: [],
 	status: "idle",
+	error: null,
 };
 
 const boardsSlice = createSlice({
@@ -184,14 +186,16 @@ const boardsSlice = createSlice({
 		builder
 			.addCase(loadBoards.pending, (state) => {
 				state.status = "loading";
+				state.error = null;
 			})
 			.addCase(loadBoards.fulfilled, (state, action) => {
 				state.status = "received";
 				state.items.push(...action.payload);
 				if (state.items.length) state.active = state.items[0].id;
 			})
-			.addCase(loadBoards.rejected, (state) => {
+			.addCase(loadBoards.rejected, (state, action) => {
 				state.status = "rejected";
+				state.error = action.payload || "Cannot load data";
 			});
 	},
 });

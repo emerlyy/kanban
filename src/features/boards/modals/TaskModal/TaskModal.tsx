@@ -1,5 +1,14 @@
 import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import Modal, { ModalProps } from "@/components/Modal/Modal";
+import ActionPopup from "@/features/boards/ActionPopup/ActionPopup";
+import {
+	deleteTask,
+	moveTask,
+	toggleSubtask,
+} from "@/features/boards/boardsSlice";
+import { useBoards } from "@/features/boards/useBoards";
+import { useDeleteModal } from "@/features/boards/useDeleteModal";
+import { useEditTaskModal } from "@/features/boards/useEditTaskModal";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { LocalTask } from "@/types";
 import Checkbox from "@/ui/Checkbox/Checkbox";
@@ -7,11 +16,6 @@ import Select, { SelectOption } from "@/ui/Select/Select";
 import Text from "@/ui/Text/Text";
 import Title from "@/ui/Title/Title";
 import { useState } from "react";
-import ActionPopup from "../../ActionPopup/ActionPopup";
-import { deleteTask, moveTask, toggleSubtask } from "../../boardsSlice";
-import { useBoards } from "../../useBoards";
-import { useDeleteModal } from "../../useDeleteModal";
-import { useEditTaskModal } from "../../useEditTaskModal";
 import TaskFormModal from "../TaskFormModal/TaskFormModal";
 import styles from "./TaskModal.module.css";
 
@@ -23,7 +27,7 @@ type Props = Pick<ModalProps, "isOpened" | "onClose"> & {
 const TaskModal = ({ isOpened, onClose, task, initialStatusId }: Props) => {
 	const [statusId, setStatusId] = useState(initialStatusId);
 
-	const { activeBoard } = useBoards();
+	const [activeBoard] = useBoards();
 
 	const dispatch = useAppDispatch();
 

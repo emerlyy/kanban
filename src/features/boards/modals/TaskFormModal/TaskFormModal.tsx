@@ -65,7 +65,7 @@ const TaskFormModal = ({
 		});
 	}, [reset, initialTitle, initialDescription, initialSubtasks]);
 
-	const { activeBoard } = useBoards();
+	const [activeBoard] = useBoards();
 
 	const options = activeBoard?.columns.map((col) => ({
 		value: col.id,

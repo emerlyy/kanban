@@ -21,7 +21,7 @@ export const useEditTaskModal = (
 ): ReturnType => {
 	const dispatch = useAppDispatch();
 	const [isOpened, openModal, closeModal] = useModal();
-	const { activeBoard } = useBoards();
+	const [activeBoard] = useBoards();
 
 	const initialSubtasks = useMemo(() => task.subtasks, [task]);
 
