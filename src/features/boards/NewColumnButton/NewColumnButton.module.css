@@ -1,7 +1,7 @@
-.newColumnButton {
-  min-height: calc(100svh - 96px - 24px - 40px - 50px);
+.columnButton {
+	min-height: calc(100svh - 96px - 24px - 40px - 50px);
 	width: 280px;
-  margin-top: 40px;
+	margin-top: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -9,8 +9,9 @@
 	background: var(--color-gradient);
 	border-radius: 6px;
 	cursor: pointer;
-  
+
 	&:hover {
+		background: var(--color-gradient);
 		> span {
 			color: var(--color-accent);
 		}

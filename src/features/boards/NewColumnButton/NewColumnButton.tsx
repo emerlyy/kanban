@@ -1,21 +1,45 @@
 import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
+import Button from "@/ui/Button/Button";
 import Title from "@/ui/Title/Title";
-import { useEditBoardModal } from "../useEditBoardModal";
+import { useBoardModal } from "../useBoardModal";
 import styles from "./NewColumnButton.module.css";
 
-const NewColumnButton = () => {
-	const { openModal, modalProps } = useEditBoardModal();
+type NewColumnButtonProps = {
+	type?: "button" | "column";
+	action?: "new" | "edit";
+};
+
+const NewColumnButton = ({
+	type = "button",
+	action = "edit",
+}: NewColumnButtonProps) => {
+	const { openModal, modalProps } = useBoardModal(action);
 
 	return (
 		<>
-			<button className={styles.newColumnButton} onClick={openModal}>
-				<Title tag="span" size="xl" color="gray">
-					+ New Column
-				</Title>
-			</button>
+			<Button
+				color="primary"
+				size="l"
+				onClick={openModal}
+				className={type === "column" ? styles.columnButton : undefined}
+			>
+				{type === "button" ? (
+					action === "new" ? (
+						"+ Create New Board"
+					) : (
+						"+ Add New Column"
+					)
+				) : (
+					<Title tag="span" size="xl" color="gray">
+						{action === "new" ? "+ New Board" : "+ New Column"}
+					</Title>
+				)}
+			</Button>
 			<BoardFormModal
-				title="Edit Board"
-				submiButtonText="Save Changes"
+				title={action === "new" ? "Add New Board" : "Edit Board"}
+				submiButtonText={
+					action === "new" ? "+ Create New Board" : "Save Changes"
+				}
 				{...modalProps}
 			/>
 		</>

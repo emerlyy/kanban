@@ -1,12 +1,12 @@
 import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import { useTheme } from "@/context/ThemeContext";
 import ActionPopup from "@/features/boards/ActionPopup/ActionPopup";
-import { selectActiveBoard } from "@/features/boards/boardSelectors";
+import { selectActiveBoard } from "@/features/boards/boardsSelectors";
 import { deleteBoard } from "@/features/boards/boardsSlice";
 import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
 import TaskFormModal from "@/features/boards/modals/TaskFormModal/TaskFormModal";
+import { useBoardModal } from "@/features/boards/useBoardModal";
 import { useDeleteModal } from "@/features/boards/useDeleteModal";
-import { useEditBoardModal } from "@/features/boards/useEditBoardModal";
 import { useNewTaskModal } from "@/features/boards/useNewTaskModal";
 import { selectMenuState } from "@/features/menu/menuSelectors";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -24,7 +24,7 @@ const Header = () => {
 		useNewTaskModal();
 
 	const { openModal: openEditBoardModal, modalProps: editBoardModalProps } =
-		useEditBoardModal();
+		useBoardModal("edit");
 
 	const {
 		openModal: openDeleteActiveBoardModal,
@@ -48,7 +48,7 @@ const Header = () => {
 					/>
 				)}
 				<div className={styles.content}>
-					<Title size="xl">{activeBoard?.name || ". . ."}</Title>
+					<Title size="xl">{activeBoard?.name}</Title>
 					<div className={styles.buttonsWrapper}>
 						<Button
 							color="primary"

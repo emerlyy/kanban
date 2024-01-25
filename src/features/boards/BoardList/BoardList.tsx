@@ -2,12 +2,12 @@ import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormMod
 import BoardListItem from "@/ui/BoardsListItem/BoardsListItem";
 import Title from "@/ui/Title/Title";
 import { useBoardList } from "../useBoardList";
-import { useNewBoardModal } from "../useNewBoardModal";
 import styles from "./BoardList.module.css";
+import { useBoardModal } from "../useBoardModal";
 
 const BoardsList = () => {
 	const [boards, activeBoard, changeBoard] = useBoardList();
-	const { openModal, modalProps } = useNewBoardModal();
+	const { openModal, modalProps } = useBoardModal('new');
 
 	return (
 		<>
