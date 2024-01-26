@@ -1,13 +1,15 @@
+import DraggableTask from "@/components/DraggableTask/DraggableTask";
 import { LocalColumn } from "@/types";
-import Task from "../Task/Task";
+import React from "react";
 import Title from "../Title/Title";
 import styles from "./Column.module.css";
 
-type Props = {
+export type ColumnProps = {
 	column: LocalColumn;
+	isOver?: boolean;
 };
 
-const Column = ({ column }: Props) => {
+const Column = React.memo(({ column, isOver }: ColumnProps) => {
 	const { id, name, tasks } = column;
 
 	return (
@@ -15,13 +17,15 @@ const Column = ({ column }: Props) => {
 			<Title tag="h2" color="gray" size="s" className={styles.columnTitle}>
 				{name} ({tasks.length})
 			</Title>
-			<ul className={styles.tasksWrapper}>
+			<ul
+				className={`${styles.tasksWrapper}${isOver ? ` ${styles.over}` : ""}`}
+			>
 				{tasks.map((task) => (
-					<Task key={task.id} task={task} columnId={id} />
+					<DraggableTask key={task.id} id={task.id} task={task} columnId={id} />
 				))}
 			</ul>
 		</div>
 	);
-};
+});
 
 export default Column;

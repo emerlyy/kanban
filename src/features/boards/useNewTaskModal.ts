@@ -3,13 +3,24 @@ import { useModal } from "@/hooks/useModal";
 import { nanoid } from "@reduxjs/toolkit";
 import { SubmitHandler } from "react-hook-form";
 import { addTask } from "./boardsSlice";
-import { ITaskFormValues } from "./modals/TaskFormModal/TaskFormModal";
+import {
+	ITaskFormValues,
+	TaskFormModalProps,
+} from "./modals/TaskFormModal/TaskFormModal";
 import { useBoards } from "./useBoards";
 
-export const useNewTaskModal = () => {
+type ReturnType = {
+	openModal: () => void;
+	modalProps: Pick<
+		TaskFormModalProps,
+		"isOpened" | "onClose" | "onSubmit" | "initialStatus"
+	>;
+};
+
+export const useNewTaskModal = (): ReturnType => {
 	const dispatch = useAppDispatch();
 	const [isOpened, openModal, closeModal] = useModal();
-	const { activeBoard } = useBoards();
+	const [activeBoard] = useBoards();
 
 	const onSubmit: SubmitHandler<ITaskFormValues> = (data) => {
 		if (activeBoard) {
@@ -34,5 +45,18 @@ export const useNewTaskModal = () => {
 		closeModal();
 	};
 
-	return { openModal, modalProps: { isOpened, onClose: closeModal, onSubmit } };
+	return {
+		openModal,
+		modalProps: {
+			isOpened,
+			onClose: closeModal,
+			onSubmit,
+			initialStatus: activeBoard
+				? {
+						label: activeBoard.columns[0].name,
+						value: activeBoard.columns[0].id,
+				  }
+				: undefined,
+		},
+	};
 };

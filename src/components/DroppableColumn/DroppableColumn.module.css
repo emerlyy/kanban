@@ -1,0 +1,13 @@
+.columnWrapper {
+	&:nth-child(3n + 1) {
+		--point-color: #49c4e5;
+	}
+
+	&:nth-child(3n + 2) {
+		--point-color: #8471f2;
+	}
+
+	&:nth-child(3n + 3) {
+		--point-color: #67e2ae;
+	}
+}

@@ -1,18 +1,19 @@
 import TaskModal from "@/features/boards/modals/TaskModal/TaskModal";
 import { useModal } from "@/hooks/useModal";
 import { LocalColumn, LocalTask } from "@/types";
+import React from "react";
 import Text from "../Text/Text";
 import Title from "../Title/Title";
 import styles from "./Task.module.css";
 
-type Props = {
+export type TaskProps = {
 	task: LocalTask;
 	columnId: LocalColumn["id"];
 };
 
-const Task = ({ task, columnId }: Props) => {
+const Task = React.memo(({ task, columnId }: TaskProps) => {
 	const [isOpened, openModal, closeModal] = useModal();
-	
+
 	const completedSubtasks = task.subtasks.filter(
 		(subtask) => subtask.isCompleted
 	).length;
@@ -35,6 +36,6 @@ const Task = ({ task, columnId }: Props) => {
 			/>
 		</>
 	);
-};
+});
 
 export default Task;

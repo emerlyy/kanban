@@ -17,7 +17,7 @@ export interface ITaskFormValues {
 	status: SelectOption;
 }
 
-export type EditTaskModalProps = {
+export type TaskFormModalProps = {
 	title: string;
 	submitButtonText: string;
 	onSubmit: SubmitHandler<ITaskFormValues>;
@@ -37,7 +37,7 @@ const TaskFormModal = ({
 	initialDescription,
 	initialSubtasks,
 	initialStatus,
-}: EditTaskModalProps) => {
+}: TaskFormModalProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -62,8 +62,9 @@ const TaskFormModal = ({
 			title: initialTitle,
 			description: initialDescription,
 			subtasks: initialSubtasks,
+			status: initialStatus,
 		});
-	}, [reset, initialTitle, initialDescription, initialSubtasks]);
+	}, [reset, initialTitle, initialDescription, initialSubtasks, initialStatus]);
 
 	const [activeBoard] = useBoards();
 

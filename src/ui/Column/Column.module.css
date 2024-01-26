@@ -1,18 +1,21 @@
 .column {
 	width: 280px;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 
-	&:nth-child(3n + 1) {
-		--point-color: #49c4e5;
-	}
+	&:not(:only-child) {
+		&:nth-child(3n + 1) {
+			--point-color: #49c4e5;
+		}
 
-	&:nth-child(3n + 2) {
-		--point-color: #8471f2;
-	}
+		&:nth-child(3n + 2) {
+			--point-color: #8471f2;
+		}
 
-	&:nth-child(3n + 3) {
-		--point-color: #67e2ae;
+		&:nth-child(3n + 3) {
+			--point-color: #67e2ae;
+		}
 	}
 }
 
@@ -30,18 +33,35 @@
 		top: 50%;
 		translate: 0 -50%;
 		border-radius: 50%;
-		background-color: var(--point-color, gray);
+		background-color: var(--point-color, var(--color-accent));
 	}
 }
 
 .tasksWrapper {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	height: 100%;
-	border-radius: 6px;
+	border-radius: 10px;
 
-	&:empty {
+	&:before {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		inset: 0;
 		background: var(--color-gradient);
+		opacity: 0;
+		transition: 0.1s;
+		border-radius: 10px;
+	}
+
+	&:empty&:before {
+		opacity: 1;
+	}
+
+	&.over&:before {
+		opacity: 1;
+		background-color: var(--color-accent-light);
 	}
 }

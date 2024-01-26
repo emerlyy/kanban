@@ -7,7 +7,7 @@
 	justify-content: center;
 	border: none;
 	background: var(--color-gradient);
-	border-radius: 6px;
+	border-radius: 10px;
 	cursor: pointer;
 
 	&:hover {

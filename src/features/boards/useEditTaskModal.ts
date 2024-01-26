@@ -5,14 +5,14 @@ import { useMemo } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { editTask } from "./boardsSlice";
 import {
-	EditTaskModalProps,
 	ITaskFormValues,
+	TaskFormModalProps,
 } from "./modals/TaskFormModal/TaskFormModal";
 import { useBoards } from "./useBoards";
 
 type ReturnType = {
 	openModal: () => void;
-	modalProps: Omit<EditTaskModalProps, "submitButtonText" | "title">;
+	modalProps: Omit<TaskFormModalProps, "submitButtonText" | "title">;
 };
 
 export const useEditTaskModal = (
