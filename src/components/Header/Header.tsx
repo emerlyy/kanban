@@ -1,3 +1,4 @@
+import IconAddTask from "@/assets/icon-add-task-mobile.svg";
 import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import { useTheme } from "@/context/ThemeContext";
 import ActionPopup from "@/features/boards/ActionPopup/ActionPopup";
@@ -8,8 +9,10 @@ import TaskFormModal from "@/features/boards/modals/TaskFormModal/TaskFormModal"
 import { useBoardModal } from "@/features/boards/useBoardModal";
 import { useDeleteModal } from "@/features/boards/useDeleteModal";
 import { useNewTaskModal } from "@/features/boards/useNewTaskModal";
-import { selectMenuState } from "@/features/menu/menuSelectors";
+import MobileMenu from "@/features/sidebar/MobileMenu/MobileMenu";
+import { useSidebarState } from "@/features/sidebar/useSidebarState";
 import { useAppSelector } from "@/hooks/reduxHooks";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import Button from "@/ui/Button/Button";
 import Logo from "@/ui/Logo/Logo";
 import Title from "@/ui/Title/Title";
@@ -17,7 +20,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
 	const { theme } = useTheme();
-	const isMenuOpened = useAppSelector(selectMenuState);
+	const [isSidebarVisible,,isAboveSmallScreens] = useSidebarState();
 	const activeBoard = useAppSelector(selectActiveBoard);
 
 	const { openModal: openNewTaskModal, modalProps: newTaskModalProps } =
@@ -34,29 +37,41 @@ const Header = () => {
 	const isTaskButtonDisabled = !activeBoard?.columns.length;
 	const isPopupDisabled = !activeBoard;
 
+	const isAboveMediumScreens = useMediaQuery("(min-width: 700px)");
+
 	return (
 		<>
 			<div
 				className={`${styles.header} ${
-					isMenuOpened ? styles.sidebarActive : ""
+					isSidebarVisible ? styles.sidebarActive : ""
 				}`}
 			>
-				{!isMenuOpened && (
+				{!isSidebarVisible && (
 					<Logo
 						className={styles.logo}
 						color={theme === "light" ? "dark" : "light"}
 					/>
 				)}
 				<div className={styles.content}>
-					<Title size="xl">{activeBoard?.name}</Title>
+					<div className={styles.boardNameWrapper}>
+						<Title size="xl" className={styles.headerBoardName}>
+							{activeBoard?.name}
+						</Title>
+						{!isAboveSmallScreens && <MobileMenu />}
+					</div>
 					<div className={styles.buttonsWrapper}>
 						<Button
 							color="primary"
 							size="l"
 							onClick={openNewTaskModal}
 							disabled={isTaskButtonDisabled}
+							className={styles.addNewTaskButton}
 						>
-							+ Add New Task
+							{isAboveMediumScreens ? (
+								"+ Add New Task"
+							) : (
+								<img src={IconAddTask} alt="Add New Task" />
+							)}
 						</Button>
 						<ActionPopup
 							type="board"

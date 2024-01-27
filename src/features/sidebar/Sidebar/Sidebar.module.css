@@ -1,9 +1,32 @@
-.menu {
+.sidebarLabel {
+	position: fixed;
+	left: 0;
+	bottom: 32px;
+	width: 56px;
+	height: 48px;
+	background: var(--color-accent);
+	border: none;
+	outline: none;
+	border-radius: 0 100px 100px 0;
+	padding: 0 4px 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	z-index: 10;
+
+	&:hover {
+		background: var(--color-accent-light);
+	}
+}
+
+.sidebar {
 	position: fixed;
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 300px;
+	width: var(--sidebar-width);
 	background: var(--color-bg-elements);
 	padding-block: 32px 48px;
 	display: flex;

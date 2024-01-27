@@ -1,13 +1,14 @@
-import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
 import BoardListItem from "@/ui/BoardsListItem/BoardsListItem";
 import Title from "@/ui/Title/Title";
 import { useBoardList } from "../useBoardList";
 import styles from "./BoardList.module.css";
-import { useBoardModal } from "../useBoardModal";
 
-const BoardsList = () => {
+type BoardListProps = {
+	onCreateNewBoardButtonClick: () => void;
+};
+
+const BoardsList = ({ onCreateNewBoardButtonClick }: BoardListProps) => {
 	const [boards, activeBoard, changeBoard] = useBoardList();
-	const { openModal, modalProps } = useBoardModal('new');
 
 	return (
 		<>
@@ -28,15 +29,10 @@ const BoardsList = () => {
 					<BoardListItem
 						title="+ Create New Board"
 						className={styles.colorAccent}
-						onClick={openModal}
+						onClick={onCreateNewBoardButtonClick}
 					/>
 				</li>
 			</ul>
-			<BoardFormModal
-				title="Add New Board"
-				submiButtonText="+ Create New Board"
-				{...modalProps}
-			/>
 		</>
 	);
 };

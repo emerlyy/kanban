@@ -22,6 +22,7 @@ const Modal = ({
 	const ref = useRef<HTMLDivElement>(null);
 	useOutsideClick(ref, onClose, closeOnOutsideClick && isOpened);
 	useKeyPress("Escape", onClose, isOpened);
+	
 	if (!isOpened) return null;
 
 	return (

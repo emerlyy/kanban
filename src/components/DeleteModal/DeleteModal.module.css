@@ -6,9 +6,11 @@
 
 .buttonsWrapper {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 16px;
 
 	button {
+		min-width: 180px;
 		flex-grow: 1;
 	}
 }

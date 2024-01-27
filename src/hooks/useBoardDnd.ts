@@ -1,21 +1,34 @@
 import { moveTask } from "@/features/boards/boardsSlice";
 import { LocalBoard } from "@/types";
+import { isUserUsingMobile } from "@/utils/isUserUsingMobile";
 import {
 	DragEndEvent,
 	PointerSensor,
+	TouchSensor,
 	useSensor,
 	useSensors,
 } from "@dnd-kit/core";
 import { useAppDispatch } from "./reduxHooks";
 
+const TouchOptions = {
+	delay: 600,
+	tolerance: 5,
+};
+
+const PointerOptions = {
+	distance: 8,
+};
+
 export const useBoardDnd = (board: LocalBoard) => {
 	const dispatch = useAppDispatch();
 
+	const isMobileEntry = isUserUsingMobile();
+
+	const detectSensor = () => (isMobileEntry ? TouchSensor : PointerSensor);
+
 	const sensors = useSensors(
-		useSensor(PointerSensor, {
-			activationConstraint: {
-				distance: 8,
-			},
+		useSensor(detectSensor(), {
+			activationConstraint: isMobileEntry ? TouchOptions : PointerOptions,
 		})
 	);
 

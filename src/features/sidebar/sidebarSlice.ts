@@ -1,11 +1,11 @@
 import { loadSidebarState } from "@/utils/localStorage";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface MenuState {
+interface SidebarState {
 	isOpened: boolean;
 }
 
-const initialState: MenuState = {
+const initialState: SidebarState = {
 	isOpened: false,
 };
 
@@ -15,12 +15,12 @@ const menuSlice = createSlice({
 	name: "@@menu",
 	initialState: savedState ? { isOpened: savedState } : initialState,
 	reducers: {
-		toggleMenu: (state) => {
+		toggleSidebar: (state) => {
 			state.isOpened = !state.isOpened;
 		},
 	},
 });
 
-export const { toggleMenu } = menuSlice.actions;
+export const { toggleSidebar } = menuSlice.actions;
 
 export default menuSlice.reducer;

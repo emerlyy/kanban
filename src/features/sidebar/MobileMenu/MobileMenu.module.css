@@ -1,0 +1,29 @@
+.menuButton {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+	border: none;
+	outline: none;
+	background: none;
+	cursor: pointer;
+	padding: 8px;
+	transition: 0.1s;
+
+	&.opened {
+		rotate: 180deg;
+	}
+}
+
+.menuModal {
+	width: 264px;
+	padding: 16px 0 16px 0;
+}
+
+.boardsList {
+	padding-right: 24px;
+}
+
+.themeSwitcher {
+	margin-top: 16px;
+	padding-inline: 16px;
+}
