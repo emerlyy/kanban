@@ -7,7 +7,7 @@ const EmptyScreen = () => {
 	const [, , { qty }] = useBoards();
 	return (
 		<div className={styles.emptyScreen}>
-			<Title tag="h1" color="gray" size="l">
+			<Title tag="h1" color="gray" size="l" className={styles.message}>
 				{qty
 					? "This board is empty. Create a new column to get started."
 					: "There are no boards available. Create a new board to get started"}
