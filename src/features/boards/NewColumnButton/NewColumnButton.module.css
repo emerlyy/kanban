@@ -1,6 +1,6 @@
 .columnButton {
-	min-height: calc(100svh - 96px - 24px - 40px - 50px);
 	width: 280px;
+	min-width: 280px;
 	margin-top: 40px;
 	display: flex;
 	align-items: center;

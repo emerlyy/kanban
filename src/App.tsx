@@ -15,24 +15,19 @@ const App = () => {
 	const [isSidebarVisible] = useSidebarState();
 
 	return (
-		<main>
-			{status === "loading" && <Loading />}
-			{status === "rejected" && <Error message={error || ""} />}
-			{status === "received" && (
-				<>
-					<Sidebar />
-					<Header />
-
-					<div
-						className={`${styles.boardWrapper} ${
-							isSidebarVisible ? styles.sidebarActive : ""
-						}`}
-					>
-						<ActiveBoardDisplay />
-					</div>
-				</>
-			)}
-		</main>
+		<>
+			<Sidebar />
+			<Header />
+			<main
+				className={`${styles.app}${
+					isSidebarVisible ? ` ${styles.sidebarActive}` : ""
+				}`}
+			>
+				{status === "loading" && <Loading />}
+				{status === "rejected" && <Error message={error || ""} />}
+				{status === "received" && <ActiveBoardDisplay />}
+			</main>
+		</>
 	);
 };
 

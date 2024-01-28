@@ -10,7 +10,7 @@
 }
 
 .sidebarActive {
-	padding-left: var(--sidebar-width);
+	margin-left: var(--sidebar-width);
 }
 
 .logo {

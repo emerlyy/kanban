@@ -47,6 +47,11 @@
 	);
 }
 
+html{
+	height: 100%;
+	overflow: hidden;
+}
+
 body {
 	--color-bg: var(--color-gray-light);
 	--color-bg-elements: var(--color-light);
@@ -58,17 +63,15 @@ body {
 	background: var(--color-bg);
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
-
+	overflow: hidden;
 	--sidebar-width: 300px;
+	height: 100%;
 
 	@media (max-width: 1024px) {
 		--sidebar-width: 260px;
 	}
 }
 
-body::-webkit-scrollbar {
-	display: none;
-}
 
 body[data-theme="dark"] {
 	--color-bg: var(--color-gray-very-dark);
@@ -81,9 +84,5 @@ body[data-theme="dark"] {
 }
 
 #root {
-	display: flex;
-	min-height: 100svh;
-	> main {
-		flex-grow: 1;
-	}
+	height: 100%;
 }

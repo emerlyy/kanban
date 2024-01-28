@@ -15,6 +15,7 @@ const Board = ({ board }: Props) => {
 
 	return (
 		<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+			<div className={styles.boardWrapper}>
 			<div className={styles.board}>
 				{board?.columns.length ? (
 					<>
@@ -32,6 +33,7 @@ const Board = ({ board }: Props) => {
 				) : (
 					<EmptyScreen />
 				)}
+			</div>
 			</div>
 		</DndContext>
 	);

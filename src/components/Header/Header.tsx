@@ -20,7 +20,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
 	const { theme } = useTheme();
-	const [isSidebarVisible,,isAboveSmallScreens] = useSidebarState();
+	const [isSidebarVisible, , isAboveSmallScreens] = useSidebarState();
 	const activeBoard = useAppSelector(selectActiveBoard);
 
 	const { openModal: openNewTaskModal, modalProps: newTaskModalProps } =
@@ -54,10 +54,14 @@ const Header = () => {
 				)}
 				<div className={styles.content}>
 					<div className={styles.boardNameWrapper}>
-						<Title size="xl" className={styles.headerBoardName}>
-							{activeBoard?.name}
-						</Title>
-						{!isAboveSmallScreens && <MobileMenu />}
+						{activeBoard?.name && (
+							<>
+								<Title size="xl" className={styles.headerBoardName}>
+									{activeBoard.name}
+								</Title>
+								{!isAboveSmallScreens && <MobileMenu />}
+							</>
+						)}
 					</div>
 					<div className={styles.buttonsWrapper}>
 						<Button
