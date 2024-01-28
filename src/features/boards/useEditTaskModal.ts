@@ -26,13 +26,15 @@ export const useEditTaskModal = (
 	const initialSubtasks = useMemo(() => task.subtasks, [task]);
 
 	const onSubmit: SubmitHandler<ITaskFormValues> = (data) => {
-		const newSubtasks = data.subtasks.map((subtask) => ({
-			title: subtask.value,
-			id: subtask.inputId,
-			isCompleted:
-				initialSubtasks.find((isubtask) => isubtask.id === subtask.inputId)
-					?.isCompleted || false,
-		}));
+		const newSubtasks = data.subtasks
+			? data.subtasks.map((subtask) => ({
+					title: subtask.value,
+					id: subtask.inputId,
+					isCompleted:
+						initialSubtasks.find((isubtask) => isubtask.id === subtask.inputId)
+							?.isCompleted || false,
+			  }))
+			: [];
 		if (activeBoard) {
 			dispatch(
 				editTask({

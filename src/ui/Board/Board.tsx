@@ -16,10 +16,9 @@ const Board = ({ board }: Props) => {
 	return (
 		<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
 			<div className={styles.boardWrapper}>
-			<div className={styles.board}>
-				{board?.columns.length ? (
-					<>
-						{board?.columns.map((column) => {
+				{!!board.columns.length ? (
+					<div className={styles.board}>
+						{board.columns.map((column) => {
 							return (
 								<DroppableColumn
 									key={column.id}
@@ -29,11 +28,10 @@ const Board = ({ board }: Props) => {
 							);
 						})}
 						<NewColumnButton type="column" />
-					</>
+					</div>
 				) : (
 					<EmptyScreen />
 				)}
-			</div>
 			</div>
 		</DndContext>
 	);

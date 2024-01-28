@@ -32,11 +32,13 @@ export const useNewTaskModal = (): ReturnType => {
 						id: nanoid(),
 						title: data.title,
 						description: data.description,
-						subtasks: data.subtasks.map((subtask) => ({
-							id: subtask.inputId,
-							title: subtask.value,
-							isCompleted: false,
-						})),
+						subtasks: data.subtasks
+							? data.subtasks.map((subtask) => ({
+									id: subtask.inputId,
+									title: subtask.value,
+									isCompleted: false,
+							  }))
+							: [],
 						status: data.status.label,
 					},
 				})
@@ -51,7 +53,7 @@ export const useNewTaskModal = (): ReturnType => {
 			isOpened,
 			onClose: closeModal,
 			onSubmit,
-			initialStatus: activeBoard
+			initialStatus: activeBoard?.columns[0]
 				? {
 						label: activeBoard.columns[0].name,
 						value: activeBoard.columns[0].id,

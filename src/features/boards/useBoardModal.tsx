@@ -11,7 +11,10 @@ export const useBoardModal = (type: "new" | "edit") => {
 	const [isOpened, openModal, closeModal] = useModal();
 	const [activeBoard] = useBoards();
 
-	const initialColumns = useMemo(() => activeBoard?.columns, [activeBoard]);
+	const initialColumns = useMemo(
+		() => (activeBoard?.columns ? activeBoard.columns : []),
+		[activeBoard]
+	);
 
 	const onSubmit: SubmitHandler<IBoardFormValues> = (data) => {
 		switch (type) {
@@ -27,7 +30,7 @@ export const useBoardModal = (type: "new" | "edit") => {
 				const newColumns = data.columns.map((col) => ({
 					name: col.value,
 					tasks:
-						initialColumns?.find((icol) => icol.id === col.inputId)?.tasks ||
+						initialColumns.find((icol) => icol.id === col.inputId)?.tasks ||
 						[],
 					id: col.inputId,
 				}));
@@ -64,7 +67,7 @@ export const useBoardModal = (type: "new" | "edit") => {
 					onClose: closeModal,
 					onSubmit,
 					initialName: activeBoard?.name,
-					initialColumns: initialColumns?.map((col) => ({
+					initialColumns: initialColumns.map((col) => ({
 						value: col.name,
 						inputId: col.id,
 					})),

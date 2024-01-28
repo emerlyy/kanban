@@ -47,7 +47,7 @@ const BoardFormModal = ({
 	});
 
 	useEffect(() => {
-		reset({ name: initialName, columns: initialColumns });
+		reset({ name: initialName || "", columns: initialColumns || [] });
 	}, [reset, initialName, initialColumns]);
 
 	return (
