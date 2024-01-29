@@ -47,9 +47,10 @@
 	);
 }
 
-html{
+html {
 	height: 100%;
 	overflow: hidden;
+	color-scheme: dark light;
 }
 
 body {
@@ -70,8 +71,14 @@ body {
 	@media (max-width: 1024px) {
 		--sidebar-width: 260px;
 	}
-}
 
+	&[data-theme="light"] {
+		color-scheme: light;
+	}
+	&[data-theme="dark"] {
+		color-scheme: dark;
+	}
+}
 
 body[data-theme="dark"] {
 	--color-bg: var(--color-gray-very-dark);

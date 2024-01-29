@@ -25,9 +25,10 @@ const Sidebar = () => {
 					className={styles.logo}
 					color={theme === "light" ? "dark" : "light"}
 				/>
-				<div className={styles.boardsList}>
-					<BoardsList onCreateNewBoardButtonClick={openBoardModal} />
-				</div>
+				<BoardsList
+					onCreateNewBoardButtonClick={openBoardModal}
+					className={styles.boardsList}
+				/>
 				<div className={styles.bottomControls}>
 					<ThemeSwitcher className={styles.themeSwitcher} />
 					<Button

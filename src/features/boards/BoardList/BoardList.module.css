@@ -1,3 +1,9 @@
+.boardList{
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
 .listTitle {
 	margin: 0 0 20px 32px;
 }
@@ -5,6 +11,12 @@
 .list {
 	display: flex;
 	flex-direction: column;
+	overflow: overlay;
+	direction: rtl;
+
+	li{
+		direction: ltr;
+	}
 }
 
 .colorAccent {

@@ -5,13 +5,17 @@ import styles from "./BoardList.module.css";
 
 type BoardListProps = {
 	onCreateNewBoardButtonClick: () => void;
+	className?: string;
 };
 
-const BoardsList = ({ onCreateNewBoardButtonClick }: BoardListProps) => {
+const BoardsList = ({
+	onCreateNewBoardButtonClick,
+	className,
+}: BoardListProps) => {
 	const [boards, activeBoard, changeBoard] = useBoardList();
 
 	return (
-		<>
+		<div className={`${styles.boardList}${className ? ` ${className}` : ""}`}>
 			<Title tag="h2" size="s" color="gray" className={styles.listTitle}>
 				All Boards ({boards.length})
 			</Title>
@@ -35,7 +39,7 @@ const BoardsList = ({ onCreateNewBoardButtonClick }: BoardListProps) => {
 					</li>
 				</ul>
 			)}
-		</>
+		</div>
 	);
 };
 
