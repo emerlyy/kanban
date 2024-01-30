@@ -84,7 +84,7 @@ const TaskModal = ({ isOpened, onClose, task, initialStatusId }: Props) => {
 						</Title>
 						<ActionPopup
 							type="task"
-							position="center"
+							position="left"
 							onEdit={openEditTaskModal}
 							onDelete={openDeleteModal}
 						/>

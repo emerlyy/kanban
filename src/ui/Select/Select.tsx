@@ -40,6 +40,8 @@ const Select = forwardRef<SelectInstance<SelectOption, false>, SelectProps>(
 				<CSelect
 					ref={ref}
 					classNames={classNames}
+					menuPosition="fixed"
+					menuPlacement="auto"
 					components={{
 						DropdownIndicator: DownChevron,
 					}}

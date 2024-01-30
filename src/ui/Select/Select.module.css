@@ -50,7 +50,7 @@
 	}
 	.menu {
 		margin-block: 10px;
-		box-shadow: none;
+		box-shadow: 0 0 6px color-mix(in srgb, var(--color-gray), transparent 50%);
 		overflow: hidden;
 		background: none;
 		border-radius: 8px;
