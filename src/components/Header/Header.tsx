@@ -8,7 +8,7 @@ import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormMod
 import TaskFormModal from "@/features/boards/modals/TaskFormModal/TaskFormModal";
 import { useBoardModal } from "@/features/boards/useBoardModal";
 import { useDeleteModal } from "@/features/boards/useDeleteModal";
-import { useNewTaskModal } from "@/features/boards/useNewTaskModal";
+import { useTaskModal } from "@/features/boards/useTaskModal";
 import MobileMenu from "@/features/sidebar/MobileMenu/MobileMenu";
 import { useSidebarState } from "@/features/sidebar/useSidebarState";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -24,7 +24,7 @@ const Header = () => {
 	const activeBoard = useAppSelector(selectActiveBoard);
 
 	const { openModal: openNewTaskModal, modalProps: newTaskModalProps } =
-		useNewTaskModal();
+		useTaskModal({ type: "new" });
 
 	const { openModal: openEditBoardModal, modalProps: editBoardModalProps } =
 		useBoardModal("edit");

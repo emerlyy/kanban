@@ -8,7 +8,6 @@ import {
 } from "@/features/boards/boardsSlice";
 import { useBoards } from "@/features/boards/useBoards";
 import { useDeleteModal } from "@/features/boards/useDeleteModal";
-import { useEditTaskModal } from "@/features/boards/useEditTaskModal";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { LocalTask } from "@/types";
 import Checkbox from "@/ui/Checkbox/Checkbox";
@@ -16,6 +15,7 @@ import Select, { SelectOption } from "@/ui/Select/Select";
 import Text from "@/ui/Text/Text";
 import Title from "@/ui/Title/Title";
 import { useState } from "react";
+import { useTaskModal } from "../../useTaskModal";
 import TaskFormModal from "../TaskFormModal/TaskFormModal";
 import styles from "./TaskModal.module.css";
 
@@ -55,7 +55,7 @@ const TaskModal = ({ isOpened, onClose, task, initialStatusId }: Props) => {
 	};
 
 	const { openModal: openEditTaskModal, modalProps: editTaskModalProps } =
-		useEditTaskModal(task, initialStatusId);
+		useTaskModal({ type: "edit", task, initialStatusId });
 
 	const { openModal: openDeleteModal, modalProps: deleteModalProps } =
 		useDeleteModal(
