@@ -109,6 +109,7 @@ const TaskFormModal = ({
 					control={control}
 					register={register}
 					errors={errors}
+					inputPlaceholder="Your subtask title"
 				/>
 				<Controller
 					control={control}

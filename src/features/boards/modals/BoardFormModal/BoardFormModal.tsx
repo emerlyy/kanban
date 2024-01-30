@@ -80,6 +80,7 @@ const BoardFormModal = ({
 					control={control}
 					register={register}
 					errors={errors}
+					inputPlaceholder="Your column title"
 				/>
 				<Button color="primary" size="s" type="submit">
 					{submiButtonText}

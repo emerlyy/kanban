@@ -20,6 +20,7 @@ type FormValues = {
 
 type Props = {
 	label?: string;
+	inputPlaceholder?: string;
 	name: string;
 	buttonText: string;
 	control: Control<any>;
@@ -29,6 +30,7 @@ type Props = {
 
 const InputList = ({
 	label,
+	inputPlaceholder,
 	control,
 	name,
 	buttonText,
@@ -60,6 +62,7 @@ const InputList = ({
 					<React.Fragment key={field.id}>
 						<Input
 							autoComplete="off"
+							placeholder={inputPlaceholder}
 							removable
 							{...register(`${name}.${index}.value`, {
 								required: {
@@ -84,7 +87,7 @@ const InputList = ({
 						append({ value: "", inputId: nanoid() });
 					}}
 				>
-				{buttonText}
+					{buttonText}
 				</Button>
 			</div>
 		</div>
