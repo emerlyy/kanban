@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import Button from "@/ui/Button/Button";
 import Input from "@/ui/Input/Input";
 import Text from "@/ui/Text/Text";
@@ -6,17 +7,12 @@ import React from "react";
 import {
 	Control,
 	FieldErrors,
-	FieldValues,
 	UseFormRegister,
 	useFieldArray,
 } from "react-hook-form";
 import styles from "./InputList..module.css";
 
 export type ListInput = { value: string; inputId: ReturnType<typeof nanoid> };
-
-type FormValues = {
-	[K: string]: ListInput[];
-} & FieldValues;
 
 type Props = {
 	label?: string;
@@ -25,7 +21,7 @@ type Props = {
 	buttonText: string;
 	control: Control<any>;
 	register: UseFormRegister<any>;
-	errors: FieldErrors<FormValues>;
+	errors: FieldErrors<any>;
 };
 
 const InputList = ({
@@ -37,11 +33,7 @@ const InputList = ({
 	register,
 	errors,
 }: Props) => {
-	const { fields, append, remove } = useFieldArray<
-		FormValues,
-		any,
-		"id" | "value" | "inputId"
-	>({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name,
 	});
@@ -71,7 +63,7 @@ const InputList = ({
 								},
 							})}
 							onRemove={() => remove(index)}
-							//@ts-expect-error
+							// @ts-expect-error errors has any type
 							errorMessage={errors[name]?.[index]?.value?.message}
 						/>
 						<div

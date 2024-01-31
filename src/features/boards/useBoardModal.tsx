@@ -12,66 +12,56 @@ export const useBoardModal = (type: "new" | "edit") => {
 	const [activeBoard] = useBoards();
 
 	const initialColumns = useMemo(
-		() => (activeBoard?.columns ? activeBoard.columns : []),
+		() => activeBoard?.columns || [],
 		[activeBoard]
 	);
 
 	const onSubmit: SubmitHandler<IBoardFormValues> = (data) => {
+		const { name, columns } = data;
+
 		switch (type) {
 			case "new":
 				dispatch(
 					createBoard({
-						name: data.name,
-						columnNames: data.columns.map((col) => col.value),
+						name: name,
+						columnNames: columns.map((col) => col.value),
 					})
 				);
 				break;
 			case "edit":
-				const newColumns = data.columns.map((col) => ({
+				const newColumns = columns.map((col) => ({
 					name: col.value,
 					tasks:
-						initialColumns.find((icol) => icol.id === col.inputId)?.tasks ||
-						[],
+						initialColumns.find((icol) => icol.id === col.inputId)?.tasks || [],
 					id: col.inputId,
 				}));
 
-				if (activeBoard) {
+				activeBoard &&
 					dispatch(
 						editBoard({
 							id: activeBoard.id,
-							name: data.name,
+							name: name,
 							newColumns,
 						})
 					);
-				}
+
 				break;
 		}
 		closeModal();
 	};
 
-	switch (type) {
-		case "new":
-			return {
-				openModal,
-				modalProps: {
-					isOpened,
-					onClose: closeModal,
-					onSubmit,
-				},
-			};
-		case "edit":
-			return {
-				openModal,
-				modalProps: {
-					isOpened,
-					onClose: closeModal,
-					onSubmit,
-					initialName: activeBoard?.name,
-					initialColumns: initialColumns.map((col) => ({
-						value: col.name,
-						inputId: col.id,
-					})),
-				},
-			};
-	}
+	const modalProps = {
+		isOpened,
+		onClose: closeModal,
+		onSubmit,
+		...(type === "edit" && {
+			initialName: activeBoard?.name,
+			initialColumns: initialColumns.map((col) => ({
+				value: col.name,
+				inputId: col.id,
+			})),
+		}),
+	};
+
+	return { openModal, modalProps };
 };

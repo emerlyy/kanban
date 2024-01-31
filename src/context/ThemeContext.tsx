@@ -17,20 +17,19 @@ type ThemeProviderProps = {
 };
 
 const setInitialState = () => {
-  let currentTheme:Theme = "light";
+	let currentTheme: Theme = "light";
 
-  if (typeof window !== "undefined" && window.localStorage) {
-    let storageTheme = loadTheme();
-    currentTheme = storageTheme ? storageTheme : "light";
-  }
+	if (typeof window !== "undefined" && window.localStorage) {
+		const storageTheme = loadTheme();
+		currentTheme = storageTheme ? storageTheme : "light";
+	}
 
-  return currentTheme;
+	return currentTheme;
 };
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-	const [theme, setTheme] = useState<ThemeContextType["theme"]>(
-		setInitialState
-	);
+	const [theme, setTheme] =
+		useState<ThemeContextType["theme"]>(setInitialState);
 
 	const themeValue: ThemeContextType = useMemo(
 		() => ({

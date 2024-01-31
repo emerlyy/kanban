@@ -95,40 +95,27 @@ export const useTaskModal = (props: ArgumentType): ReturnType => {
 		}
 	};
 
-	switch (props.type) {
-		case "new":
-			return {
-				openModal,
-				modalProps: {
-					isOpened,
-					onClose: closeModal,
-					onSubmit,
-					initialStatus: activeBoard?.columns[0]
-						? {
-								label: activeBoard.columns[0].name,
-								value: activeBoard.columns[0].id,
-						  }
-						: undefined,
-				},
-			};
-		case "edit":
-			return {
-				openModal,
-				modalProps: {
-					isOpened,
-					onClose: closeModal,
-					onSubmit,
-					initialTitle: props.task.title,
-					initialDescription: props.task.description,
-					initialSubtasks: props.task.subtasks.map((subtask) => ({
-						value: subtask.title,
-						inputId: subtask.id,
-					})),
-					initialStatus: {
-						label: props.task.status,
-						value: props.initialStatusId,
-					},
-				},
-			};
-	}
+	const modalProps = {
+		isOpened,
+		onClose: closeModal,
+		onSubmit,
+		initialStatus: activeBoard?.columns[0] && {
+			label: activeBoard.columns[0].name,
+			value: activeBoard.columns[0].id,
+		},
+		...(props.type === "edit" && {
+			initialTitle: props.task.title,
+			initialDescription: props.task.description,
+			initialSubtasks: props.task.subtasks.map((subtask) => ({
+				value: subtask.title,
+				inputId: subtask.id,
+			})),
+			initialStatus: {
+				label: props.task.status,
+				value: props.initialStatusId,
+			},
+		}),
+	};
+
+	return { openModal, modalProps };
 };
