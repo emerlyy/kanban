@@ -140,33 +140,42 @@ const boardsSlice = createSlice({
 			action: PayloadAction<{
 				boardId: string;
 				oldColumnId: string;
-				nextColumnId: string;
+				nextColumnId?: string;
 				taskId: string;
+				index?: number;
 			}>
 		) => {
-			const board = state.items.find((b) => b.id === action.payload.boardId);
+			const { boardId, nextColumnId, oldColumnId, taskId, index } =
+				action.payload;
 
-			const oldColumn = board?.columns.find(
-				(col) => col.id === action.payload.oldColumnId
-			);
-			const nextColumn = board?.columns.find(
-				(col) => col.id === action.payload.nextColumnId
-			);
+			const board = state.items.find((b) => b.id === boardId);
+
+			const oldColumn = board?.columns.find((col) => col.id === oldColumnId);
+			const nextColumn = nextColumnId
+				? board?.columns.find((col) => col.id === nextColumnId)
+				: oldColumn;
 
 			if (oldColumn && nextColumn) {
-				const task = oldColumn.tasks.find(
-					(task) => task.id === action.payload.taskId
-				);
+				const task = oldColumn.tasks.find((task) => task.id === taskId);
 
 				if (oldColumn.tasks) {
 					oldColumn.tasks = oldColumn.tasks.filter(
-						(task) => task.id !== action.payload.taskId
+						(task) => task.id !== taskId
 					);
 				}
 
 				if (task) {
 					task.status = nextColumn.name;
-					nextColumn.tasks.push(task);
+
+					if (index !== undefined) {
+						nextColumn.tasks = [
+							...nextColumn.tasks.slice(0, index),
+							task,
+							...nextColumn.tasks.slice(index),
+						];
+					} else {
+						nextColumn.tasks.push(task);
+					}
 				}
 			}
 		},

@@ -1,9 +1,11 @@
 import DroppableColumn from "@/components/DroppableColumn/DroppableColumn";
 import { useBoardDnd } from "@/hooks/useBoardDnd";
 import { LocalBoard as TBoard } from "@/types";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
+import { createPortal } from "react-dom";
 import NewColumnButton from "../../features/boards/NewColumnButton/NewColumnButton";
 import EmptyScreen from "../EmptyScreen/EmptyScreen";
+import Task from "../Task/Task";
 import styles from "./Board.module.css";
 
 type Props = {
@@ -11,10 +13,10 @@ type Props = {
 };
 
 const Board = ({ board }: Props) => {
-	const [sensors, handleDragEnd] = useBoardDnd(board);
+	const { activeTask, ...contextProps } = useBoardDnd(board);
 
 	return (
-		<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+		<DndContext {...contextProps}>
 			<div className={styles.boardWrapper}>
 				{!!board.columns.length ? (
 					<div className={styles.board}>
@@ -27,6 +29,12 @@ const Board = ({ board }: Props) => {
 								/>
 							);
 						})}
+						{createPortal(
+							<DragOverlay>
+								{activeTask && <Task task={activeTask!} />}
+							</DragOverlay>,
+							document.body
+						)}
 						<NewColumnButton type="column" />
 					</div>
 				) : (

@@ -8,7 +8,7 @@ import styles from "./Task.module.css";
 
 export type TaskProps = {
 	task: LocalTask;
-	columnId: LocalColumn["id"];
+	columnId?: LocalColumn["id"];
 };
 
 const Task = React.memo(({ task, columnId }: TaskProps) => {
@@ -32,7 +32,7 @@ const Task = React.memo(({ task, columnId }: TaskProps) => {
 				isOpened={isOpened}
 				onClose={closeModal}
 				task={task}
-				initialStatusId={columnId}
+				initialStatusId={columnId || ""}
 			/>
 		</>
 	);
