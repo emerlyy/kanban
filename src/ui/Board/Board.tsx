@@ -30,7 +30,7 @@ const Board = ({ board }: Props) => {
 							);
 						})}
 						{createPortal(
-							<DragOverlay>
+							<DragOverlay className={styles.dragOverlay}>
 								{activeTask && <Task task={activeTask!} />}
 							</DragOverlay>,
 							document.body
