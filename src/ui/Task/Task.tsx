@@ -17,13 +17,13 @@ const Task = React.memo(
 	({ task, columnId, onModalToggle, className }: TaskProps) => {
 		const [isOpened, openModal, closeModal] = useModal();
 
+		useEffect(() => {
+			onModalToggle && onModalToggle(isOpened);
+		}, [isOpened, onModalToggle]);
+
 		const completedSubtasks = task.subtasks.filter(
 			(subtask) => subtask.isCompleted
 		).length;
-
-		useEffect(() => {
-			onModalToggle && onModalToggle(isOpened);
-		}, [isOpened]);
 
 		return (
 			<>
