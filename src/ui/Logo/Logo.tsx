@@ -20,12 +20,7 @@ const Logo = ({ color = "dark", className }: Props) => {
 
 	return (
 		<div className={`${styles.logo}  ${className ? ` ${className}` : ""}`}>
-			<img
-				className={styles.img}
-				src={logoSrc}
-				alt="kanban"
-				
-			/>
+			<img className={styles.img} src={logoSrc} alt="kanban" />
 		</div>
 	);
 };

@@ -75,6 +75,9 @@ export const useTaskModal = (props: ArgumentType): ReturnType => {
 					  }))
 					: [];
 
+				const newColumnId =
+					initialStatusId !== data.status.value ? data.status.value : undefined;
+
 				dispatch(
 					editTask({
 						boardId: activeBoard.id,
@@ -87,7 +90,7 @@ export const useTaskModal = (props: ArgumentType): ReturnType => {
 							status: data.status.label,
 							subtasks: newSubtasks,
 						},
-						newColumnId: data.status.value,
+						newColumnId,
 					})
 				);
 				break;

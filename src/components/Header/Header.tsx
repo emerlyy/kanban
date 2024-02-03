@@ -16,7 +16,26 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import Button from "@/ui/Button/Button";
 import Logo from "@/ui/Logo/Logo";
 import Title from "@/ui/Title/Title";
+import { AnimatePresence, m } from "framer-motion";
 import styles from "./Header.module.css";
+
+const variants = {
+	sidebarClosed: {
+		marginLeft: "0",
+	},
+	sidebarActive: {
+		marginLeft: "var(--sidebar-width)",
+	},
+};
+
+const logoVariants = {
+	open: {
+		width: "auto",
+	},
+	closed: {
+		width: 0,
+	},
+};
 
 const Header = () => {
 	const { theme } = useTheme();
@@ -41,17 +60,30 @@ const Header = () => {
 
 	return (
 		<>
-			<div
-				className={`${styles.header} ${
-					isSidebarVisible ? styles.sidebarActive : ""
-				}`}
+			<m.div
+				className={styles.header}
+				variants={variants}
+				animate={isSidebarVisible ? "sidebarActive" : "sidebarClosed"}
+				transition={{ duration: 0.2 }}
 			>
-				{!isSidebarVisible && (
-					<Logo
-						className={styles.logo}
-						color={theme === "light" ? "dark" : "light"}
-					/>
-				)}
+				<AnimatePresence initial={false}>
+					{!isSidebarVisible && (
+						<m.div
+							key="logo"
+							className={styles.logoWrapper}
+							variants={logoVariants}
+							animate="open"
+							exit="closed"
+							style={{ originX: 1 }}
+							transition={{ duration: 0.1 }}
+						>
+							<Logo
+								className={styles.logo}
+								color={theme === "light" ? "dark" : "light"}
+							/>
+						</m.div>
+					)}
+				</AnimatePresence>
 				<div className={styles.content}>
 					<div className={styles.boardNameWrapper}>
 						{activeBoard?.name && (
@@ -85,7 +117,7 @@ const Header = () => {
 						/>
 					</div>
 				</div>
-			</div>
+			</m.div>
 			<TaskFormModal
 				title="Add New Task"
 				submitButtonText="Create Task"

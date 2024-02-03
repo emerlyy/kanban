@@ -7,8 +7,14 @@ import { useBoardModal } from "@/features/boards/useBoardModal";
 import Button from "@/ui/Button/Button";
 import Logo from "@/ui/Logo/Logo";
 import Title from "@/ui/Title/Title";
+import { AnimatePresence, m } from "framer-motion";
 import { useSidebar } from "../useSidebar";
 import styles from "./Sidebar.module.css";
+
+const variants = {
+	hidden: { translateX: "-100%" },
+	show: { translateX: "0%" },
+};
 
 const Sidebar = () => {
 	const { theme } = useTheme();
@@ -18,42 +24,52 @@ const Sidebar = () => {
 
 	if (!isAboveMediumScreens) return;
 
-	return isSidebarOpened ? (
-		<>
-			<aside className={styles.sidebar}>
-				<Logo
-					className={styles.logo}
-					color={theme === "light" ? "dark" : "light"}
-				/>
-				<BoardsList
-					onCreateNewBoardButtonClick={openBoardModal}
-					className={styles.boardsList}
-				/>
-				<div className={styles.bottomControls}>
-					<ThemeSwitcher className={styles.themeSwitcher} />
-					<Button
-						variant="sidebar"
-						size="l"
-						color="secondary"
-						onClick={toggleSidebar}
-					>
-						<HideIcon />
-						<Title tag="span" size="m" color="gray">
-							Hide Sidebar
-						</Title>
-					</Button>
-				</div>
-			</aside>
-			<BoardFormModal
-				title="Add New Board"
-				submiButtonText="+ Create New Board"
-				{...boardModalProps}
-			/>
-		</>
-	) : (
-		<button className={styles.sidebarLabel} onClick={toggleSidebar}>
-			<img src={EyeIcon} alt="Show Sidebar" />
-		</button>
+	return (
+		<AnimatePresence initial={false}>
+			{isSidebarOpened ? (
+				<m.aside
+					className={styles.sidebar}
+					key="sidebar"
+					variants={variants}
+					initial="hidden"
+					animate="show"
+					exit="hidden"
+					transition={{ duration: 0.2 }}
+				>
+					<Logo
+						className={styles.logo}
+						color={theme === "light" ? "dark" : "light"}
+					/>
+					<BoardsList
+						onCreateNewBoardButtonClick={openBoardModal}
+						className={styles.boardsList}
+					/>
+					<div className={styles.bottomControls}>
+						<ThemeSwitcher className={styles.themeSwitcher} />
+						<Button
+							variant="sidebar"
+							size="l"
+							color="secondary"
+							onClick={toggleSidebar}
+						>
+							<HideIcon />
+							<Title tag="span" size="m" color="gray">
+								Hide Sidebar
+							</Title>
+						</Button>
+					</div>
+					<BoardFormModal
+						title="Add New Board"
+						submiButtonText="+ Create New Board"
+						{...boardModalProps}
+					/>
+				</m.aside>
+			) : (
+				<button className={styles.sidebarLabel} onClick={toggleSidebar}>
+					<img src={EyeIcon} alt="Show Sidebar" />
+				</button>
+			)}
+		</AnimatePresence>
 	);
 };
 

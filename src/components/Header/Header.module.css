@@ -13,10 +13,16 @@
 	margin-left: var(--sidebar-width);
 }
 
-.logo {
+.logoWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	flex-shrink: 0;
-	padding-inline: 30px 24px;
 	border-right: 1px solid var(--color-lines);
+}
+
+.logo {
+	padding-inline: 30px 24px;
 
 	@media (max-width: 768px) {
 		padding-inline: 24px;
