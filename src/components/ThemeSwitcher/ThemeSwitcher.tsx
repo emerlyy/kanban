@@ -1,13 +1,14 @@
 import MoonIcon from "@/assets/icon-dark-theme.svg";
 import SunIcon from "@/assets/icon-light-theme.svg";
 import { useTheme } from "@/context/ThemeContext";
+import React from "react";
 import styles from "./ThemeSwitcher.module.css";
 
 type Props = {
 	className?: string;
 };
 
-const ThemeSwitcher = ({ className }: Props) => {
+const ThemeSwitcher = React.memo(({ className }: Props) => {
 	const { theme, toggleTheme } = useTheme();
 	return (
 		<div
@@ -25,6 +26,6 @@ const ThemeSwitcher = ({ className }: Props) => {
 			<img src={MoonIcon} alt="dark" />
 		</div>
 	);
-};
+});
 
 export default ThemeSwitcher;
