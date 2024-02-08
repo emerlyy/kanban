@@ -1,23 +1,20 @@
 import EyeIcon from "@/assets/icon-show-sidebar.svg";
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
-import { useTheme } from "@/context/ThemeContext";
 import BoardsList from "@/features/boards/BoardList/BoardList";
 import BoardFormModal from "@/features/boards/modals/BoardFormModal/BoardFormModal";
 import { useBoardModal } from "@/features/boards/useBoardModal";
 import Button from "@/ui/Button/Button";
-import Logo from "@/ui/Logo/Logo";
 import Title from "@/ui/Title/Title";
 import { AnimatePresence, m } from "framer-motion";
 import { useSidebar } from "../useSidebar";
 import styles from "./Sidebar.module.css";
 
 const variants = {
-	hidden: { translateX: "-100%" },
-	show: { translateX: "0%" },
+	hidden: { marginLeft: "calc(var(--sidebar-width) * -1)" },
+	show: { marginLeft: "0" },
 };
 
 const Sidebar = () => {
-	const { theme } = useTheme();
 	const [isAboveMediumScreens, isSidebarOpened, toggleSidebar] = useSidebar();
 	const { openModal: openBoardModal, modalProps: boardModalProps } =
 		useBoardModal("new");
@@ -36,10 +33,6 @@ const Sidebar = () => {
 					exit="hidden"
 					transition={{ duration: 0.2 }}
 				>
-					<Logo
-						className={styles.logo}
-						color={theme === "light" ? "dark" : "light"}
-					/>
 					<BoardsList
 						onCreateNewBoardButtonClick={openBoardModal}
 						className={styles.boardsList}

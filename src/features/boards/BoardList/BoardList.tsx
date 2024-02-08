@@ -19,26 +19,28 @@ const BoardsList = ({
 			<Title tag="h2" size="s" color="gray" className={styles.listTitle}>
 				All Boards ({boards.length})
 			</Title>
-			{!!boards.length && (
-				<ul className={styles.list}>
-					{boards.map((board, index) => (
-						<li key={`${board.name}-${index}`}>
-							<BoardListItem
-								title={board.name}
-								active={board === activeBoard}
-								onClick={changeBoard(board)}
-							/>
-						</li>
-					))}
-					<li>
-						<BoardListItem
-							title="+ Create New Board"
-							className={styles.colorAccent}
-							onClick={onCreateNewBoardButtonClick}
-						/>
-					</li>
-				</ul>
-			)}
+			<ul className={styles.list}>
+				{!!boards.length && (
+					<>
+						{boards.map((board, index) => (
+							<li key={`${board.name}-${index}`}>
+								<BoardListItem
+									title={board.name}
+									active={board === activeBoard}
+									onClick={changeBoard(board)}
+								/>
+							</li>
+						))}
+					</>
+				)}
+				<li>
+					<BoardListItem
+						title="+ Create New Board"
+						className={styles.colorAccent}
+						onClick={onCreateNewBoardButtonClick}
+					/>
+				</li>
+			</ul>
 		</div>
 	);
 };

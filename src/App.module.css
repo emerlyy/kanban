@@ -1,13 +1,41 @@
 .app {
-	padding-top: 96px;
-	overflow: hidden;
-	height: 100%;
 	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-areas:
+		"logo header"
+		"board board";
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+	overflow: hidden;
+
+	&:has(aside) {
+		grid-template-areas:
+			"logo logo header"
+			"sidebar board board";
+
+		grid-template-columns: auto auto 1fr;
+	}
+}
+
+.board {
+	grid-area: board;
+	overflow: hidden;
+	border-top: 1px solid var(--color-lines);
+}
+
+.logo {
+	padding-inline: 30px 24px;
+	background: var(--color-bg-elements);
+	border-right: 1px solid var(--color-lines);
+	grid-area: logo;
 
 	@media (max-width: 768px) {
-		padding-top: 72px;
+		padding-inline: 24px;
 	}
+
 	@media (max-width: 600px) {
-		padding-top: 64px;
+		padding-inline: 16px 0;
+		border-right: none;
 	}
 }

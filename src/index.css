@@ -54,6 +54,10 @@ html {
 }
 
 body {
+	height: 100%;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	overflow: hidden;
 	--color-bg: var(--color-gray-light);
 	--color-bg-elements: var(--color-light);
 	--color-bg-select: var(--color-light);
@@ -61,12 +65,8 @@ body {
 	--color-text: var(--color-dark);
 	--color-label: var(--color-gray);
 	--color-gradient: var(--gradient-light);
-	background: var(--color-bg);
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
-	overflow: hidden;
 	--sidebar-width: 300px;
-	height: 100%;
+	background: var(--color-bg);
 
 	@media (max-width: 1024px) {
 		--sidebar-width: 260px;
